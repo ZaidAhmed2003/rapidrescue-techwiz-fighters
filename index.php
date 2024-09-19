@@ -1,6 +1,9 @@
 <?php 
 require "includes/header.php"
 ?>
+
+// code goes here
     
-</body>
-</html>
+<?php 
+require "includes/header.php"
+?>
