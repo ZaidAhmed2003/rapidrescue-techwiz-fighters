@@ -91,3 +91,12 @@ CREATE TABLE ambulance_driver_assignments (
     FOREIGN KEY (ambulanceid) REFERENCES ambulances(ambulanceid),
     FOREIGN KEY (driverid) REFERENCES drivers(driverid)
 );
+
+CREATE TABLE `rapidrescue`.`messages` (
+  `idmessages` INT NOT NULL,
+  `fullname` VARCHAR(45) NULL,
+  `email` VARCHAR(100) NULL,
+  `phone` VARCHAR(45) NULL,
+  `subject` VARCHAR(100) NULL,
+  `message` VARCHAR(255) NULL,
+  PRIMARY KEY (`idmessages`));
