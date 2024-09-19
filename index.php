@@ -7,7 +7,6 @@ require "includes/navbar.php"
 require "includes/hero.php";
 require "includes/aboutus.php"
 ?>
-// code goes here
 
 <?php
 require "includes/footer.php"
