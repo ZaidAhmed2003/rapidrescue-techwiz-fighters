@@ -1,21 +1,24 @@
 <div class="bottom-parallax">
     <!--Start footer area -->
     <footer class="footer-area">
-        <div class="footer-area-shape float-bob"
-            style="background-image: url(assets/images/shape/shape-2.png);"></div>
+        <div
+            class="footer-area-shape float-bob"
+            style="background-image: url(assets/images/shape/shape-2.png)"></div>
         <!--Start Footer-->
         <div class="footer">
             <div class="container">
                 <div class="row text-right-rtl">
-
                     <!--Start single footer widget-->
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="single-footer-widget marbtm50">
                             <div class="our-company-info">
                                 <div class="footer-logo">
                                     <a href="index.html">
-                                        <img src="assets/images/footer/footer-logo.png" alt="Awesome Logo"
-                                            title="">
+                                        <img
+                                            width="110px"
+                                            src="assets/images/footer/footer-logo.png"
+                                            alt="Awesome Logo"
+                                            title="" />
                                     </a>
                                 </div>
                                 <div class="text-box">
@@ -30,8 +33,7 @@
                                                 </div>
                                                 <div class="text">
                                                     <p>
-                                                        <a
-                                                            href="mailto:yourmail@email.com">needhelp@company.com</a>
+                                                        <a href="mailto:yourmail@email.com">needhelp@company.com</a>
                                                     </p>
                                                 </div>
                                             </div>
@@ -60,7 +62,6 @@
                                         </li>
                                     </ul>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -68,7 +69,8 @@
 
                     <!--Start single footer widget-->
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                        <div class="single-footer-widget single-footer-widget--link-box margintop marbtm50">
+                        <div
+                            class="single-footer-widget single-footer-widget--link-box margintop marbtm50">
                             <div class="title">
                                 <h3>Links</h3>
                             </div>
@@ -94,12 +96,24 @@
                             </div>
                             <div class="footer-widget-links">
                                 <ul>
-                                    <li><a href="services-single-1.html">Ambulance Car</a></li>
-                                    <li><a href="services-single-2.html">Medical Flight Services</a></li>
-                                    <li><a href="services-single-3.html">Medical Escort</a></li>
-                                    <li><a href="services-single-4.html">Private Air Ambulance</a></li>
-                                    <li><a href="services-single-5.html">Advance Life Support</a></li>
-                                    <li><a href="services-single-6.html">General Services</a></li>
+                                    <li>
+                                        <a href="services-single-1.html">Ambulance Car</a>
+                                    </li>
+                                    <li>
+                                        <a href="services-single-2.html">Medical Flight Services</a>
+                                    </li>
+                                    <li>
+                                        <a href="services-single-3.html">Medical Escort</a>
+                                    </li>
+                                    <li>
+                                        <a href="services-single-4.html">Private Air Ambulance</a>
+                                    </li>
+                                    <li>
+                                        <a href="services-single-5.html">Advance Life Support</a>
+                                    </li>
+                                    <li>
+                                        <a href="services-single-6.html">General Services</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -110,9 +124,16 @@
                     <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <div class="single-footer-widget margintop pdtop20">
                             <div class="footer-widget-quote-box">
-                                <h3>We can help,<br> today.</h3>
-                                <p>24 hours a day,<br> 7 days a week support.<br> Free, no obligation<br> price
-                                    quotes.</p>
+                                <h3>
+                                    We can help,<br />
+                                    today.
+                                </h3>
+                                <p>
+                                    24 hours a day,<br />
+                                    7 days a week support.<br />
+                                    Free, no obligation<br />
+                                    price quotes.
+                                </p>
                                 <div class="btn-box">
                                     <a class="btn-one" href="contact.html">
                                         <span class="txt">Get a Free Quote</span>
@@ -122,7 +143,6 @@
                         </div>
                     </div>
                     <!--End single footer widget-->
-
                 </div>
             </div>
         </div>
@@ -131,7 +151,10 @@
             <div class="container">
                 <div class="bottom-inner">
                     <div class="copyright">
-                        <p>Copyright &copy; 2022 <a href="index.html">Ambons</a> All Rights Reserved.</p>
+                        <p>
+                            Copyright &copy; 2022 <a href="index.html">Ambons</a> All
+                            Rights Reserved.
+                        </p>
                     </div>
                     <div class="footer-social-link">
                         <ul class="clearfix">
@@ -152,11 +175,9 @@
                 </div>
             </div>
         </div>
-
     </footer>
     <!--End footer area-->
 </div>
-
 
 <button class="scroll-top scroll-to-target" data-target="html">
     <span class="flaticon-up-arrow"></span>
@@ -171,9 +192,17 @@
             <form method="post" action="index.html">
                 <div class="form-group">
                     <fieldset>
-                        <input type="search" class="form-control" name="search-input" value=""
-                            placeholder="Search Here" required>
-                        <input type="submit" value="Search Now!" class="theme-btn style-four">
+                        <input
+                            type="search"
+                            class="form-control"
+                            name="search-input"
+                            value=""
+                            placeholder="Search Here"
+                            required />
+                        <input
+                            type="submit"
+                            value="Search Now!"
+                            class="theme-btn style-four" />
                     </fieldset>
                 </div>
             </form>
@@ -190,7 +219,6 @@
 </div>
 <!-- search-popup end -->
 </div>
-
 
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/aos.js"></script>
@@ -221,7 +249,6 @@
 
 <!-- thm custom script -->
 <script src="assets/js/custom.js"></script>
-
 </body>
 
 </html>
