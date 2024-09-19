@@ -1214,7 +1214,7 @@
     display: none;
 }
 
-.blog-style2-carousel.owl-carousel {
+.blog-style2-carousel.owl-carousel {}
 
 .blog-style2-carousel.owl-carousel .owl-stage-outer {
     overflow: visible;
@@ -1229,5 +1229,4 @@
 .blog-style2-carousel.owl-carousel .owl-item.active {
     opacity: 1;
     visibility: visible;
-}
 }
