@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="btns-box">
-                            <a class="btn-one" href="about.html">
+                            <a class="btn-one" href="#">
                                 <span class="txt">
                                     Discover About More<i class="icon-refresh arrow"></i>
                                 </span>

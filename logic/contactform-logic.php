@@ -1,6 +1,4 @@
 <?php
-// contactform-logic.php
-session_start();
 require '../config/database.php'; // Database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

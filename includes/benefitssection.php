@@ -190,7 +190,7 @@
             </div>
             <div class="col-xl-2 col-lg-12">
                 <div class="slogan-btn-box">
-                    <a class="btn-one" href="contact.html">
+                    <a class="btn-one" href="#contact">
                         <span class="txt">Contact with Us</span>
                     </a>
                 </div>

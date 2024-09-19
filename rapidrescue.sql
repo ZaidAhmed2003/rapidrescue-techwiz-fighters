@@ -93,7 +93,7 @@ CREATE TABLE ambulance_driver_assignments (
 );
 
 CREATE TABLE `rapidrescue`.`messages` (
-  `idmessages` INT NOT NULL,
+  `idmessages` AUTO_INCREMENT INT NOT NULL,
   `fullname` VARCHAR(45) NULL,
   `email` VARCHAR(100) NULL,
   `phone` VARCHAR(45) NULL,

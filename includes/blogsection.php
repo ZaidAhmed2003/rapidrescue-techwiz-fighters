@@ -27,14 +27,14 @@
                             <p><span class="icon-calendar"></span> 20 Sep, 2021</p>
                         </div>
                         <h3>
-                            <a href="blog-single.html">Trusted, International Air Ambulance Company</a>
+                            <a href="#">Trusted, International Air Ambulance Company</a>
                         </h3>
                         <p>
                             Lorem ipsum dolor sit amet, coned sectetur notte elit sed
                             do.
                         </p>
                         <div class="btn-box">
-                            <a href="blog-single.html">Read More</a>
+                            <a href="#">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -55,14 +55,14 @@
                             <p><span class="icon-calendar"></span> 20 Sep, 2021</p>
                         </div>
                         <h3>
-                            <a href="blog-single.html">Working for the ambulance service is much more than...</a>
+                            <a href="#">Working for the ambulance service is much more than...</a>
                         </h3>
                         <p>
                             Lorem ipsum dolor sit amet, coned sectetur notte elit sed
                             do.
                         </p>
                         <div class="btn-box">
-                            <a href="blog-single.html">Read More</a>
+                            <a href="#">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -83,14 +83,14 @@
                             <p><span class="icon-calendar"></span> 20 Sep, 2021</p>
                         </div>
                         <h3>
-                            <a href="blog-single.html">A Non-Emergency Trusted Ambulance services</a>
+                            <a href="#">A Non-Emergency Trusted Ambulance services</a>
                         </h3>
                         <p>
                             Lorem ipsum dolor sit amet, coned sectetur notte elit sed
                             do.
                         </p>
                         <div class="btn-box">
-                            <a href="blog-single.html">Read More</a>
+                            <a href="#">Read More</a>
                         </div>
                     </div>
                 </div>

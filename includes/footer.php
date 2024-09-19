@@ -33,7 +33,7 @@
                                                 </div>
                                                 <div class="text">
                                                     <p>
-                                                        <a href="mailto:yourmail@email.com">needhelp@company.com</a>
+                                                        <a href="mailto:yourmail@email.com">rapidrescue@company.com</a>
                                                     </p>
                                                 </div>
                                             </div>
@@ -76,12 +76,12 @@
                             </div>
                             <div class="footer-widget-links">
                                 <ul>
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="services.html">Our Services</a></li>
-                                    <li><a href="about.html">Flight Crews</a></li>
-                                    <li><a href="about.html">Medical Equipment</a></li>
-                                    <li><a href="about.html">Case Manager</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="#about">About</a></li>
+                                    <li><a href="#services">Our Services</a></li>
+                                    <li><a href="#contact">Contact</a></li>
+                                    <li><a href="<?= ROOT_URL ?>login.php?role=admin">Admin</a></li>
+                                    <li><a href="<?= ROOT_URL ?>login.php?role=user">User</a></li>
+                                    <li><a href="<?= ROOT_URL ?>login.php?role=driver">Driver</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -97,22 +97,22 @@
                             <div class="footer-widget-links">
                                 <ul>
                                     <li>
-                                        <a href="services-single-1.html">Ambulance Car</a>
+                                        <a href="#">Ambulance Car</a>
                                     </li>
                                     <li>
-                                        <a href="services-single-2.html">Medical Flight Services</a>
+                                        <a href="#">Medical Flight Services</a>
                                     </li>
                                     <li>
-                                        <a href="services-single-3.html">Medical Escort</a>
+                                        <a href="#">Medical Escort</a>
                                     </li>
                                     <li>
-                                        <a href="services-single-4.html">Private Air Ambulance</a>
+                                        <a href="#">Private Air Ambulance</a>
                                     </li>
                                     <li>
-                                        <a href="services-single-5.html">Advance Life Support</a>
+                                        <a href="#">Advance Life Support</a>
                                     </li>
                                     <li>
-                                        <a href="services-single-6.html">General Services</a>
+                                        <a href="#">General Services</a>
                                     </li>
                                 </ul>
                             </div>
@@ -152,7 +152,7 @@
                 <div class="bottom-inner">
                     <div class="copyright">
                         <p>
-                            Copyright &copy; 2022 <a href="index.html">Ambons</a> All
+                            Copyright &copy; 2022 <a href="index.php">RapidRescue</a> All
                             Rights Reserved.
                         </p>
                     </div>
