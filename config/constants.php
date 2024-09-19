@@ -1,6 +1,6 @@
 <?php
 // session_start();
-define('ROOT_URL', 'http://localhost/dashboard/rapidrescue/');
+define('ROOT_URL', 'http://localhost:82/dashboard/rapidrescue/');
 
 // Database
 define('DB_HOST', 'localhost');
