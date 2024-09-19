@@ -8,6 +8,6 @@ require "config/constants.php"
         <li>Services</li>
         <li>Contact</li>
         <li>Request An Ambulance</li>
-        <li>Login</li>
+        <li><a href="<?= ROOT_URL ?>signin.php">Login</a></li>
     </ul>
 </nav>
