@@ -1,6 +1,6 @@
 
 -- database
-create database rapidrescue
+-- create database rapidrescue
 
 
 
@@ -18,6 +18,16 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE ambulances (
+    ambulanceid INT AUTO_INCREMENT PRIMARY KEY,
+    vehicle_number VARCHAR(50) UNIQUE NOT NULL,
+    equipment_level ENUM('Basic Life Support (BLS)', 'Advanced Life Support (ALS)', 'Neonatal Ambulance', 'Air Ambulance', 'Patient Transport') NOT NULL,
+    capacity INT NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    current_status ENUM('available', 'dispatched', 'on_call', 'maintenance', 'in_service') DEFAULT 'available',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE emergency_requests (
     requestid INT AUTO_INCREMENT PRIMARY KEY,
     userid INT,
@@ -32,16 +42,6 @@ CREATE TABLE emergency_requests (
     FOREIGN KEY (ambulanceid) REFERENCES ambulances(ambulanceid)
 );
 
-
-CREATE TABLE ambulances (
-    ambulanceid INT AUTO_INCREMENT PRIMARY KEY,
-    vehicle_number VARCHAR(50) UNIQUE NOT NULL,
-    equipment_level ENUM('Basic Life Support (BLS)', 'Advanced Life Support (ALS)', 'Neonatal Ambulance', 'Air Ambulance', 'Patient Transport') NOT NULL,
-    capacity INT NOT NULL,
-    location VARCHAR(255) NOT NULL,
-    current_status ENUM('available', 'dispatched', 'on_call', 'maintenance', 'in_service') DEFAULT 'available',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
 CREATE TABLE emts (
     emtid INT AUTO_INCREMENT PRIMARY KEY,
@@ -97,7 +97,7 @@ CREATE TABLE ambulance_driver_assignments (
 );
 
 CREATE TABLE `rapidrescue`.`messages` (
-  `idmessages` AUTO_INCREMENT INT NOT NULL,
+  `idmessages`INT AUTO_INCREMENT NOT NULL,
   `fullname` VARCHAR(45) NULL,
   `email` VARCHAR(100) NULL,
   `phone` VARCHAR(45) NULL,
