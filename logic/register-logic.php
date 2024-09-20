@@ -2,14 +2,51 @@
 require '../config/database.php'; // Database connection
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $email = $_POST['email'];
-    $phonenumber = $_POST['phonenumber'];
-    $password = $_POST['password'];
-    $role = $_POST['role'] ?? null;  // user, driver, or admin
-    $date_of_birth = $_POST['date_of_birth'] ?? null;
-    $address = $_POST['address'] ?? null;
+    // Sanitize and retrieve POST data
+    $firstname = filter_var(trim($_POST['firstname']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $lastname = filter_var(trim($_POST['lastname']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
+    $phonenumber = filter_var(trim($_POST['phonenumber']), FILTER_SANITIZE_NUMBER_INT);
+    $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $role = $_POST['role'] ?? 'user';  // Default role to 'user' if not provided
+    $date_of_birth = !empty($_POST['dob']) ? filter_var(trim($_POST['dob']), FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null; // Optional
+    $address = filter_var(trim($_POST['address']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+    // Basic Validation
+    $errors = [];
+
+    if (empty($firstname)) {
+        $errors[] = 'First name is required.';
+    }
+    if (empty($lastname)) {
+        $errors[] = 'Last name is required.';
+    }
+
+    // Validate email
+    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors[] = 'A valid email address is required.';
+    }
+
+    // Validate phone number
+    if (empty($phonenumber)) {
+        $errors[] = 'A valid phone number is required.';
+    }
+
+    if (empty($password)) {
+        $errors[] = 'Password is required.';
+    }
+
+    if (empty($address)) {
+        $errors[] = 'Address is required.';
+    }
+
+    // If there are validation errors, display them and exit
+    if (!empty($errors)) {
+        foreach ($errors as $error) {
+            echo "<p>$error</p>";
+        }
+        exit();
+    }
 
     // Check if the email already exists
     $query = $connection->prepare("SELECT * FROM users WHERE email = ?");
@@ -18,29 +55,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $query->get_result();
 
     if ($result->num_rows > 0) {
-        echo "Email already registered";
+        echo "Email is already registered.";
         exit();
     }
 
     // Hash the password
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insert user into the database
+    // Insert the user into the database
     $stmt = $connection->prepare("
         INSERT INTO users 
         (firstname, lastname, email, phonenumber, password, date_of_birth, address, role, created_at) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
     ");
-    $stmt->bind_param("ssssssss", $firstname, $lastname, $email, $phonenumber, $hashed_password, $date_of_birth, $address, $role );
+    $stmt->bind_param("ssssssss", $firstname, $lastname, $email, $phonenumber, $hashed_password, $date_of_birth, $address, $role);
 
-    // Execute and check if the statement was successful
+    // Execute the query and check for success
     if ($stmt->execute()) {
-        echo "success";
+        echo "Registration successful!";
     } else {
         echo "Registration failed. Please try again.";
     }
 
-    // Close the statement and database connection
+    // Close the statement and connection
     $stmt->close();
     $query->close();
     $connection->close();

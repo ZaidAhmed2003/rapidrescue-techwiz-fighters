@@ -1,55 +1,87 @@
 <?php
-require "config/database.php"
+require "includes/header.php";
 ?>
 
-<form id="registerForm" method="POST">
-    <label>First Name:</label>
-    <input type="text" name="firstname" required><br>
+<section class="h-100 gradient-form" style="background-color: #eee;">
+    <div class=" d-flex justify-content-center align-items-center h-100">
+        <div class=" d-flex flex-column align-items-center justify-content-center card rounded-3 text-black">
+            <div class=" card-body p-md-5 mx-md-4 w-100">
+                <div class="text-center mb-4">
+                    <img src="<?= ROOT_URL ?>assets/images/resources/logo.png"
+                        style="width: 185px;" alt="logo">
+                </div>
+                <form id="registerForm" action="<?= ROOT_URL ?>logic/register-logic.php" method="post">
+                    <h6 class="text-center mb-4">Please register your account</h6>
 
-    <label>Last Name:</label>
-    <input type="text" name="lastname" required><br>
+                    <!-- Hidden field to set the role to 'user' by default -->
+                    <input type="hidden" name="role" value="user">
 
-    <label>Email:</label>
-    <input type="email" name="email" required><br>
+                    <div class="row container">
 
-    <label>Phone Number:</label>
-    <input type="text" name="phonenumber" required><br>
+                        <div class="col-12 col-md-6 form-outline mb-3">
+                            <label class="form-label" for="firstname">First Name</label>
+                            <input type="text" name="firstname" id="firstname" class="form-control"
+                                placeholder="first name" required />
+                        </div>
+                        <div class="col-12 col-md-6 form-outline mb-3">
+                            <label class="form-label" for="lastname">Last Name</label>
+                            <input type="text" name="lastname" id="lastname" class="form-control"
+                                placeholder="last name" required />
+                        </div>
+                        <div class="col-12 col-md-6 form-outline mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" name="email" id="email" class="form-control"
+                                placeholder="email address" required />
+                        </div>
+                        <div class="col-12 col-md-6 form-outline mb-3">
+                            <label class="form-label" for="phonenumber">Phone Number</label>
+                            <input type="text" name="phonenumber" id="phonenumber" class="form-control"
+                                placeholder="phone number" required />
+                        </div>
+                        <div class="col-12 col-md-6 form-outline mb-4">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="enter your password" required />
+                        </div>
+                        <div class="col-12 col-md-6 form-outline mb-3">
+                            <label class="form-label" for="dateofbirth">Date of Birth</label>
+                            <input type="date" name="dateofbirth" id="dateofbirth" class="form-control"
+                                placeholder="Date of Birth" />
+                        </div>
+                        <div class="col-12 col-md-6 form-outline mb-3">
+                            <label class="form-label" for="address">Address</label>
+                            <input type="text" name="address" id="address" class="form-control"
+                                placeholder="Enter your address"></input>
+                        </div>
+                    </div>
+                    <div class="text-center pt-1 mb-2 pb-1">
+                        <div class="button-box">
+                            <input
+                                id="form_botcheck"
+                                name="form_botcheck"
+                                class="form-control"
+                                type="hidden"
+                                value="" />
+                            <button
+                                class="btn-one border-low"
+                                type="submit"
+                                data-loading-text="Please wait...">
+                                <span class="txt"> Register </span>
+                            </button>
+                        </div>
 
-    <label>Password:</label>
-    <input type="password" name="password" required><br>
+                    </div>
 
-    <label>Role:</label>
-    <select name="role" required>
-        <option value="user">User</option>
-        <option value="driver">Driver</option>
-        <!-- Admin accounts should be created manually -->
-    </select><br>
+                    <div class="d-flex align-items-center justify-content-center pb-4">
+                        <p class="mb-0 mr-1">Already have an account?</p>
+                        <a href="<?= ROOT_URL ?>login.php?role=user">Login</a>
+                    </div>
 
-    <button type="submit">Register</button>
-</form>
-
-<!-- jQuery for AJAX request -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-<script>
-    $("#registerForm").on('submit', function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: '<?= ROOT_URL ?>logic/register-logic.php',
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function(response) {
-                if (response == 'success') {
-                    alert('Registration successful! You can now log in.');
-                    window.location.href = '<?= ROOT_URL ?>login.php';
-                } else {
-                    alert('Registration failed: ' + response);
-                }
-            }
-        });
-    });
-</script>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 <?php
-require "./includes/footer.php"
+require "includes/footer-end.php"
 ?>

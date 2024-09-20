@@ -7,6 +7,12 @@ if ($_SESSION['role'] != 'admin') {
     header("Location: login.php");
     exit();
 }
+
+$drivers = [];
+$result = $connection->query("SELECT driverid, firstname, lastname FROM drivers WHERE status = 'On Duty'");
+while ($row = $result->fetch_assoc()) {
+    $drivers[] = $row;
+}
 ?>
 
 <body class="dashboard-body d-flex">
@@ -16,7 +22,7 @@ if ($_SESSION['role'] != 'admin') {
         </div>
         <div class="sidebar flex-column">
             <ul class="nav flex flex-column" id="nav_accordion">
-                <li class=" sidebar-item  border-bottom ">
+                <li class=" sidebar-item active  border-bottom ">
                     <a class="" href="<?= ROOT_URL ?>admin/">Dashboard</a>
                 </li>
                 <li class="sidebar-item nav-item has-submenu border-bottom ">
@@ -37,7 +43,7 @@ if ($_SESSION['role'] != 'admin') {
                         <li><a class="nav-link" href="<?= ROOT_URL ?>admin/manage-ambulance.php">Manage Ambulance</a></li>
                     </ul>
                 </li>
-                <li class="sidebar-item nav-item active  has-submenu border-bottom ">
+                <li class="sidebar-item nav-item  has-submenu border-bottom ">
                     <a class="dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="collapse" data-bs-target="#usermanagement" aria-expanded="false">
                         <i class="fa fa-book"></i> Users
                     </a>
@@ -62,9 +68,9 @@ if ($_SESSION['role'] != 'admin') {
     <main class="flex-grow w-100">
         <div class="d-flex justify-content-between align-items-center shadow-sm py-2 px-3">
             <h3>
-                Manage Ambulances
+                Add Ambulances
             </h3>
-            <div class=" main-menu style1 navbar-expand-md navbar-light">
+            <div class="main-menu style1 navbar-expand-md navbar-light">
                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent" bis_skin_checked="1">
                     <ul class="navigation  clearfix scroll-nav">
                         <li class="dropdown pad current">
@@ -80,68 +86,69 @@ if ($_SESSION['role'] != 'admin') {
             </div>
         </div>
 
-        <div class="container-fluid px-5 py-4">
-            <div class="panel d-flex align-items-center justify-content-center">
-                <div class="panel-heading border w-100 text-center py-2">
-                    Manage Ambulances
+        <div class="container-fluid p-4">
+            <form id="ambulanceForm">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
+                        <label class="form-label" for="vehicle_number">Vehicle Number</label>
+                        <input type="text" name="vehicle_number" id="vehicle_number" class="form-control" placeholder="Vehicle Number" required />
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
+                        <label class="form-label" for="capacity">Capacity</label>
+                        <input type="number" name="capacity" id="capacity" class="form-control" placeholder="Capacity" required />
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
+                        <label class="form-label" for="location">Location</label>
+                        <input type="text" name="location" id="location" class="form-control" placeholder="Location" required />
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
+                        <label class="form-label" for="equipment_level">Equipment Level</label>
+                        <select name="equipment_level" id="equipment_level" class="form-control" required>
+                            <option value="Basic Life Support (BLS)">Basic Life Support (BLS)</option>
+                            <option value="Advanced Life Support (ALS)">Advanced Life Support (ALS)</option>
+                            <option value="Neonatal Ambulance">Neonatal Ambulance</option>
+                            <option value="Air Ambulance">Air Ambulance</option>
+                            <option value="Patient Transport">Patient Transport</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
+                        <label class="form-label" for="current_status">Current Status</label>
+                        <select name="current_status" id="current_status" class="form-control" required>
+                            <option value="available">Available</option>
+                            <option value="on_call">On Call</option>
+                            <option value="dispatched">Dispatched</option>
+                            <option value="maintenance">Maintenance</option>
+                            <option value="in_service">In Service</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
+                        <label class="form-label" for="driver_id">Assign Driver</label>
+                        <select name="driver_id" id="driver_id" class="form-control" required>
+                            <option value="">Select a Driver</option>
+                            <?php foreach ($drivers as $driver): ?>
+                                <option value="<?= $driver['driverid'] ?>"><?= $driver['firstname'] . ' ' . $driver['lastname'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="">
-                <table class="w-100 text-center">
-                    <?php
-                    $currentAdminId = $_SESSION['userid'];
-                    $query = "SELECT * FROM users WHERE NOT userid='$currentAdminId'";
-                    $users = mysqli_query($connection, $query)
-                    ?>
-                    <tbody>
-                        <?php if (mysqli_num_rows($users) > 0) : ?>
-                            <table class="table table-striped text-center">
-                                <thead>
-                                    <tr data-breakpoints="xs" class=" border">
-                                        <th class="border">Sno</th>
-                                        <th class="border">Name</th>
-                                        <th class="border">Email</th>
-                                        <th class="border">Contact</th>
-                                        <th class="border">Date of Birth</th>
-                                        <th class="border">Address</th>
-                                        <th class="border">Role</th>
-                                        <th class="border">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $serialNo = 1;
+                <div class="button-box">
+                    <input
+                        id="form_botcheck"
+                        name="form_botcheck"
+                        class="form-control"
+                        type="hidden"
+                        value="" />
+                    <button
+                        class="btn-one border-low"
+                        type="submit"
+                        data-loading-text="Please wait...">
+                        <span class="txt"> Add Ambulance </span>
+                    </button>
+                </div>
 
-                                    while ($user = mysqli_fetch_assoc($users)) : ?>
-                                        <tr class=" border">
-                                            <td class="border"><?= $serialNo++ ?></td>
-                                            <td class="border"> <?= $user['firstname'] . " " . $user['lastname'] ?>
-                                            <td class="border"><?= $user['email'] ?>
-                                            </td>
-                                            <td class="border"><?= $user['phonenumber'] ?></td>
-
-                                            <td class="border"><?= $user['date_of_birth'] ?></td>
-                                            <td class="border"><?= $user['address'] ?></td>
-                                            <td class="border"><?= $user['role'] ?></td>
-                                            <td class="border">
-                                                <a href="<?= ROOT_URL ?>admin/edit-ambulance.php?id=<?= $user['userid'] ?>" class="p-1 action-btns">Edit</a>
-                                                <a href="#" class="p-1 action-btns delete-ambulance" data-id="<?= $user['userid'] ?>">Delete</a>
-                                            </td>
-
-                                        </tr>
-                                    <?php endwhile ?>
-                                </tbody>
-                            </table>
-
-
-                        <?php else : ?>
-                            <div class=" text-center py-5    alert__message error"><?= "No Users Found" ?></div>
-                        <?php endif ?>
-
-            </div>
+            </form>
+            <div id="responseMessage" class="mt-3"></div>
         </div>
-
-
     </main>
 
     <?php

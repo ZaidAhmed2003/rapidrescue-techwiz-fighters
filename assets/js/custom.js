@@ -754,9 +754,9 @@ if ($("#loginForm").length) {
         if (response == "admin") {
           window.location.href = ROOT_URL + "admin/index.php"; // Redirect to admin dashboard
         } else if (response == "user") {
-          window.location.href = ROOT_URL + "user_dashboard.php"; // Redirect to user dashboard
+          window.location.href = ROOT_URL + "client/User/index.php"; // Redirect to user dashboard
         } else if (response == "driver") {
-          window.location.href = ROOT_URL + "driver_dashboard.php"; // Redirect to driver dashboard
+          window.location.href = ROOT_URL + "client/driver.php"; // Redirect to driver dashboard
         } else {
           alert("login failed!"); // Display error message
         }
@@ -764,6 +764,35 @@ if ($("#loginForm").length) {
       error: function (xhr, status, error) {
         // Handle errors if any
         alert("An error occurred: " + xhr.responseText);
+      },
+    });
+  });
+}
+
+//Handle Register Form
+
+if ($("#registerForm").length) {
+  $("#registerForm").on("submit", function (e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    // Collect form data
+    var formData = $(this).serialize();
+
+    // Make AJAX request
+    $.ajax({
+      type: "POST",
+      url: ROOT_URL + "logic/register-logic.php",
+      data: formData,
+      success: function (response) {
+        if (response.trim() === "success") {
+          // Redirect to login page on success
+          window.location.href = "login.php?role=user"; // Change to your login page URL
+        } else {
+          alert(response); // Show the error message
+        }
+      },
+      error: function (xhr, status, error) {
+        alert("An error occurred: " + error); // Handle error response
       },
     });
   });
@@ -791,5 +820,55 @@ if ($(".sidebar .nav-link").length) {
         }
       }
     }
+  });
+}
+
+// Handle Delete Ambulance
+if ($(".delete-ambulance").length) {
+  $(".delete-ambulance").on("click", function (e) {
+    e.preventDefault(); // Prevent the default anchor behavior
+    const id = $(this).data("id");
+
+    if (confirm("Are you sure you want to delete this ambulance?")) {
+      $.ajax({
+        url: ROOT_URL + "admin/logic/delete-ambulance-logic.php", // Update with your script path
+        type: "POST",
+        data: { id: id },
+        dataType: "json",
+        success: function (response) {
+          if (response.status === "success") {
+            alert(response.message);
+            // Optionally, refresh the page or remove the ambulance from the UI
+            location.reload(); // or you can remove the deleted item from the DOM
+          } else {
+            alert(response.message);
+          }
+        },
+        error: function () {
+          alert("An error occurred while deleting the ambulance.");
+        },
+      });
+    }
+  });
+}
+
+// Handle ADD Ambulance
+if ($(".delete-ambulance").length) {
+  $("#ambulanceForm").on("submit", function (e) {
+    e.preventDefault(); // Prevent default form submission
+    $.ajax({
+      type: "POST",
+      url: "process-add-ambulance.php", // Create this file for processing
+      data: $(this).serialize(),
+      success: function (response) {
+        $("#responseMessage").html(response); // Display response
+        $("#ambulanceForm")[0].reset(); // Reset form
+      },
+      error: function () {
+        $("#responseMessage").html(
+          '<div class="alert alert-danger">There was an error processing your request.</div>'
+        );
+      },
+    });
   });
 }

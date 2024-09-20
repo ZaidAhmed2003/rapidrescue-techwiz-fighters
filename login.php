@@ -13,7 +13,7 @@ $role = isset($_GET['role']) ? htmlspecialchars($_GET['role']) : 'user';
                     <img src="<?= ROOT_URL ?>assets/images/resources/logo.png"
                         style="width: 185px;" alt="logo">
                 </div>
-                <form id="loginForm" action="logic/login-logic.php" method="post">
+                <form id="loginForm" action="<?= ROOT_URL ?>logic/login-logic.php" method="post">
                     <h6 class="text-center mb-4">Please login to your account</h6>
                     <div class="form-outline mb-3">
                         <label class="form-label" for="email">Email</label>

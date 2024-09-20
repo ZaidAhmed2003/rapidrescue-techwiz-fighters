@@ -184,23 +184,32 @@ li.sidebar-item:hover > a {
 
 /* Login Form */
 
+#registerForm div input,
 #loginForm div input {
   padding: 1.5rem 1rem;
   border: 1px solid var(--thm-primary);
 }
+
+#registerForm div label,
 #loginForm div label {
   color: var(--thm-base);
   margin-bottom: 0.25rem;
   font-size: 16px;
   font-weight: 600;
 }
+
+#registerForm div a,
 #loginForm div a {
   font-size: 16px;
   color: var(--thm-primary);
 }
+
+#registerForm div a:hover,
 #loginForm div a:hover {
   color: var(--thm-base);
 }
+
+#registerForm div p,
 #loginForm div p {
   font-size: 16px;
 }

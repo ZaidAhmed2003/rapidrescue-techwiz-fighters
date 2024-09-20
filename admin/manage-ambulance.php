@@ -89,9 +89,13 @@ if ($_SESSION['role'] != 'admin') {
             <div class="">
                 <table class="w-100 text-center">
                     <?php
-                    // $currentAdminId = $_SESSION['userid'];
-                    $ambulanceQuery = "SELECT * from drivers d join ambulances a on d.ambulanceid=a.ambulanceid";
-                    $ambulances = mysqli_query($connection, $ambulanceQuery)
+                    $ambulanceQuery = "
+                    SELECT a.*, d.firstname, d.lastname, d.phonenumber 
+                    FROM ambulances a 
+                    LEFT JOIN drivers d ON a.ambulanceid = d.ambulanceid
+                ";
+                    $ambulances = mysqli_query($connection, $ambulanceQuery);
+
                     ?>
                     <tbody>
                         <?php if (mysqli_num_rows($ambulances) > 0) : ?>
@@ -108,22 +112,25 @@ if ($_SESSION['role'] != 'admin') {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php while ($ambulance = mysqli_fetch_assoc($ambulances)) : ?>
+                                    <?php
+                                    $serialNo = 1;
+
+                                    while ($ambulance = mysqli_fetch_assoc($ambulances)) : ?>
                                         <tr class=" border">
-                                            <td class="border"><?php
-                                                                $totalAmbulanceQuery = mysqli_query($connection, "Select * from ambulances");
-                                                                $ambulanceCount = mysqli_num_rows($totalAmbulanceQuery);
-                                                                echo $ambulanceCount;
-                                                                ?></td>
+                                            <td class="border"><?= $serialNo++ ?></td>
                                             <td class="border"><?= $ambulance['equipment_level'] ?>
                                             </td>
                                             <td class="border"><?= $ambulance['vehicle_number'] ?></td>
-                                            <td class="border"><?= $ambulance['firstname'] . " ". $ambulance['lastname'] ?></td>
+                                            <td class="border"> <?= $ambulance['firstname'] && $ambulance['lastname']
+                                                                    ? $ambulance['firstname'] . " " . $ambulance['lastname']
+                                                                    : 'Not Assigned' ?></td>
                                             <td class="border"><?= $ambulance['phonenumber'] ?></td>
                                             <td class="border"><?= $ambulance['created_at'] ?></td>
-                                            <td class="border"><a href="<?= ROOT_URL ?>admin/edit-ambulance.php?id=<?= $ambulance['ambulanceid'] ?>" class="p-1 action-btns">Edit</a>
-                                                <a href="<?= ROOT_URL ?>admin/logic/delete-ambulance-logic.php?id=<?= $ambulance['ambulanceid'] ?>" class="p-1 action-btns">Delete</a>
+                                            <td class="border">
+                                                <a href="<?= ROOT_URL ?>admin/edit-ambulance.php?id=<?= $ambulance['ambulanceid'] ?>" class="p-1 action-btns">Edit</a>
+                                                <a href="#" class="p-1 action-btns delete-ambulance" data-id="<?= $ambulance['ambulanceid'] ?>">Delete</a>
                                             </td>
+
                                         </tr>
                                     <?php endwhile ?>
                                 </tbody>
