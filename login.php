@@ -29,6 +29,7 @@ require "includes/header.php";
         <button type="submit">Login</button>
     </form>
 </div>
+
 <?php
 require "includes/footer-end.php";
 ?>

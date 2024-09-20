@@ -1,0 +1,104 @@
+.main-menu .navigation > li > .remove-padding {
+  padding: 10px;
+}
+
+.logo-image {
+  width: 69px;
+}
+
+li.sidebar-item > .remove-padding::after {
+  transform: rotate(0);
+}
+
+li.sidebar-item {
+  position: relative;
+  display: block;
+  /* padding: 0 30px; */
+  width: 100%;
+}
+
+li.sidebar-item.active > a {
+  background-color: var(--thm-base);
+  color: #ffffff;
+}
+
+li.sidebar-item > a {
+  position: relative;
+  display: block;
+  padding: 16px 10px 16px;
+  color: var(--thm-primary);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  text-align: left;
+  text-transform: capitalize;
+  transition: all 500ms ease;
+  letter-spacing: normal;
+  font-family: var(--thm-font);
+  z-index: 1;
+}
+
+li.sidebar-item:last-child > a {
+  border: none;
+}
+
+li.sidebar-item > a:before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0;
+  background-color: var(--thm-primary);
+  transition: -webkit-transform 0.4s ease;
+  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, -webkit-transform 0.4s ease;
+  -webkit-transform: scale(0, 1);
+  transform: scale(0, 1);
+  -webkit-transform-origin: right center;
+  transform-origin: right center;
+  z-index: -1;
+}
+
+li.sidebar-item:hover > a:before {
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);
+  -webkit-transform-origin: left center;
+  transform-origin: left center;
+}
+
+li.sidebar-item:hover > a {
+  color: #ffffff;
+  padding-left: 10px;
+  letter-spacing: 0.1em;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  border: none;
+  position: relative;
+  margin-bottom: 30px;
+  box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1),
+    0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1),
+    0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12),
+    0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+}
+
+.card .card-statistic-3 .card-icon-large .fas,
+.card .card-statistic-3 .card-icon-large .far,
+.card .card-statistic-3 .card-icon-large .fab,
+.card .card-statistic-3 .card-icon-large .fal {
+  font-size: 110px;
+}
+
+.card .card-statistic-3 .card-icon {
+  text-align: center;
+  line-height: 50px;
+  margin-left: 15px;
+  color: #000;
+  position: absolute;
+  right: -5px;
+  top: 20px;
+  opacity: 0.1;
+}

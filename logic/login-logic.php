@@ -1,5 +1,4 @@
-<?php 
-session_start();
+<?php
 require '../config/database.php'; // Ensure this file correctly sets up the $connection variable
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -31,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Set session variables
             $_SESSION['userid'] = $user['userid'];
             $_SESSION['firstname'] = $user['firstname'];
+            $_SESSION['lastname'] = $user['lastname'];
             $_SESSION['role'] = $user['role'];
 
             // Redirect based on role
@@ -48,4 +48,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo 'User not found';
     }
 }
-
