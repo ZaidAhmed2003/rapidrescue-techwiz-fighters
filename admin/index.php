@@ -10,44 +10,44 @@ if ($_SESSION['role'] != 'admin') {
 ?>
 
 <body class="dashboard-body d-flex">
-
     <aside class="d-flex flex-column h-100  border-bottom shadow-sm" style="width: 275px;">
         <div class="py-2 d-flex justify-content-center bg-white border-bottom shadow-sm">
             <img class="logo-image" src="<?= ROOT_URL ?>assets/images/resources/logo-short.png" alt="Logo">
         </div>
-        <div class="flex-column">
-            <ul class="flex flex-column">
+        <div class="sidebar flex-column">
+            <ul class="nav flex flex-column" id="nav_accordion">
                 <li class=" sidebar-item active  border-bottom ">
-                    <a class="" href="">Dashboard</a>
+                    <a class="" href="<?= ROOT_URL ?>admin/">Dashboard</a>
                 </li>
-                <li class="sidebar-item dropdown  border-bottom ">
-                    <a class="dropdown-toggle" href="#" id="ambulanceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="sidebar-item nav-item has-submenu border-bottom ">
+                    <a class="nav-link" href="#" role="button" data-bs-target="#dispatchControl" data-bs-toggle="collapse" aria-expanded="false">
                         <i class="fa fa-book"></i> Dispatch Control
                     </a>
-                    <ul class="sidebar-item dropdown-menu" aria-labelledby="ambulanceDropdown">
-                        <li><a class="dropdown-item" href="add-ambulance.php">Add Ambulance</a></li>
-                        <li><a class="dropdown-item" href="manage-ambulance.php">Manage Ambulance</a></li>
+                    <ul class="sidebar-item submenu collapse" id="dispatchControl">
+                        <li><a class="nav-link" href="<?= ROOT_URL ?>admin/add-ambulance.php">Add Ambulance</a></li>
+                        <li><a class="nav-link" href="<?= ROOT_URL ?>admin/manage-ambulance.php">Manage Ambulance</a></li>
                     </ul>
                 </li>
-                <li class="sidebar-item dropdown  border-bottom ">
-                    <a class="dropdown-toggle" href="#" id="ambulanceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="sidebar-item nav-item  has-submenu border-bottom ">
+                    <a class="dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="collapse" data-bs-target="#ambulanceManagement" aria-expanded="false">
                         <i class="fa fa-book"></i> Ambulance
                     </a>
-                    <ul class="sidebar-item dropdown-menu" aria-labelledby="ambulanceDropdown">
-                        <li><a class="dropdown-item" href="add-ambulance.php">Add Ambulance</a></li>
-                        <li><a class="dropdown-item" href="manage-ambulance.php">Manage Ambulance</a></li>
+                    <ul class="sidebar-item submenu collapse" id="ambulanceManagement">
+                        <li><a class="nav-link" href="<?= ROOT_URL ?>admin/add-ambulance.php">Add Ambulance</a></li>
+                        <li><a class="nav-link" href="<?= ROOT_URL ?>admin/manage-ambulance.php">Manage Ambulance</a></li>
                     </ul>
                 </li>
-                <li class="sidebar-item dropdown  border-bottom ">
-                    <a class="dropdown-toggle" href="#" id="ambulanceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <li class="sidebar-item nav-item  has-submenu border-bottom ">
+                    <a class="dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="collapse" data-bs-target="#usermanagement" aria-expanded="false">
                         <i class="fa fa-book"></i> Users
                     </a>
-                    <ul class="sidebar-item dropdown-menu" aria-labelledby="ambulanceDropdown">
-                        <li><a class="dropdown-item" href="add-ambulance.php">Add Users</a></li>
-                        <li><a class="dropdown-item" href="manage-ambulance.php">Manage Users</a></li>
+                    <ul class="sidebar-item submenu collapse" id="usermanagement">
+                        <li><a class="nav-link" href="<?= ROOT_URL ?>admin/add-user.php">Add User</a></li>
+                        <li><a class="nav-link" href="<?= ROOT_URL ?>admin/manage-users.php">Manage Users</a></li>
                     </ul>
                 </li>
-                <li class="sidebar-item dropdown border-bottom">
+
+                <!-- <li class="sidebar-item dropdown border-bottom">
                     <a class="dropdown-toggle" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-file"></i> Reports
                     </a>
@@ -55,12 +55,12 @@ if ($_SESSION['role'] != 'admin') {
                         <li><a class="dropdown-item" href="daily-reports.php">Daily Reports</a></li>
                         <li><a class="dropdown-item" href="monthly-reports.php">Monthly Reports</a></li>
                     </ul>
-                </li>
+                </li> -->
             </ul>
         </div>
     </aside>
     <main class="flex-grow w-100">
-        <div class="d-flex justify-content-between align-items-center shadow-sm p-3">
+        <div class="d-flex justify-content-between align-items-center shadow-sm py-2 px-3">
             <h3>
                 Welcome to Admin Dashboard
             </h3>
@@ -134,12 +134,15 @@ if ($_SESSION['role'] != 'admin') {
                         <div class="card-statistic-3 p-4">
                             <div class="card-icon card-icon-large"><i class="fas fa-ticket-alt"></i></div>
                             <div class="mb-4">
-                                <h5 class="card-title mb-0">Ticket Resolved</h5>
+                                <h5 class="card-title mb-0">Total Drivers</h5>
                             </div>
                             <div class="row align-items-center mb-2 d-flex">
                                 <div class="col-6">
                                     <h2 class="d-flex align-items-center mb-0">
-                                        578
+                                        <?php $totalDriversQuery = mysqli_query($connection, "Select * from  drivers");
+                                        $driversCount = mysqli_num_rows($totalDriversQuery);
+                                        echo $driversCount;
+                                        ?>
                                     </h2>
                                 </div>
                                 <div class="col-6 text-right">
@@ -151,82 +154,56 @@ if ($_SESSION['role'] != 'admin') {
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4">
-                    <div class="card">
+                    <div class="card ">
                         <div class="card-statistic-3 p-4">
-                            <div class="card-icon card-icon-large"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="card-icon card-icon-large"><i class="fas fa-ticket-alt"></i></div>
                             <div class="mb-4">
-                                <h5 class="card-title mb-0">Revenue Today</h5>
+                                <h5 class="card-title mb-0">Total Users</h5>
                             </div>
                             <div class="row align-items-center mb-2 d-flex">
                                 <div class="col-6">
                                     <h2 class="d-flex align-items-center mb-0">
-                                        $11.61k
+                                        <?php $usersQuery = mysqli_query($connection, "Select * from  users");
+                                        $usersCount = mysqli_num_rows($usersQuery);
+                                        echo $usersCount;
+                                        ?>
                                     </h2>
                                 </div>
                                 <div class="col-6 text-right">
                                     <a href="<?= ROOT_URL ?>manage-ambulance.php">View Details</a>
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4">
+                    <div class="card ">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-ticket-alt"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title mb-0">Drivers Assigned</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-6">
+                                    <h2 class="d-flex align-items-center mb-0">
+                                        <?php $driversAssignedQuery = mysqli_query($connection, "Select * from  ambulance_driver_assignments");
+                                        $driversAssignedCount = mysqli_num_rows($driversAssignedQuery);
+                                        echo $driversAssignedCount;
+                                        ?>
+                                    </h2>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <a href="<?= ROOT_URL ?>manage-ambulance.php">View Details</a>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!--
-            <div class="col-3 d-flex shadow-sm p-5">
-            <div>
-                <img class="w-" src="<?= ROOT_URL ?>assets/images/resources/ambulance.png" alt="">
-            </div>
-            <div>
-                <h6>Total Ambulances</h6>
-                <p><?php $totalAmbulanceQuery = mysqli_query($connection, "Select * from ambulances");
-                    $ambulanceCount = mysqli_num_rows($totalAmbulanceQuery);
-                    echo $ambulanceCount;
-                    ?></p>
-                <a href="<?= ROOT_URL ?>admin/">View Details</a>
-            </div>
-        </>
-        <div class="col-3 d-flex align-items-center justify-content-center shadow-sm ">
-            <div>
-                <img class="w-25" src="<?= ROOT_URL ?>assets/images/resources/ambulance.png" alt="">
-            </div>
-            <div>
-                <h3>Total EMTs</h3>
-                <p><?php $totalemtsQuery = mysqli_query($connection, "Select * from emts");
-                    $emtCount = mysqli_num_rows($totalemtsQuery);
-                    echo $emtCount;
-                    ?></p>
-                <a href="<?= ROOT_URL ?>admin/">View Details</a>
-            </div>
-        </div>
-        <div class="col-3 d-flex align-items-center justify-content-center shadow-sm ">
-            <div>
-                <img class="w-25" src="<?= ROOT_URL ?>assets/images/resources/ambulance.png" alt="">
-            </div>
-            <div>
-                <h3>Total Ambulances</h3>
-                <p><?php $totalAmbulanceQuery = mysqli_query($connection, "Select * from ambulances");
-                    $ambulanceCount = mysqli_num_rows($totalAmbulanceQuery);
-                    echo $ambulanceCount;
-                    ?></p>
-                <a href="<?= ROOT_URL ?>admin/">View Details</a>
-            </div>
-        </div>
-        <div class="col-3 d-flex align-items-center justify-content-center shadow-sm ">
-            <div>
-                <img class="w-25" src="<?= ROOT_URL ?>assets/images/resources/ambulance.png" alt="">
-            </div>
-            <div>
-                <h3>Total Ambulances</h3>
-                <p><?php $totalAmbulanceQuery = mysqli_query($connection, "Select * from ambulances");
-                    $ambulanceCount = mysqli_num_rows($totalAmbulanceQuery);
-                    echo $ambulanceCount;
-                    ?></p>
-                <a href="<?= ROOT_URL ?>admin/">View Details</a>
-            </div>
-        </div>
-        -->
     </main>
 
     <?php

@@ -768,3 +768,28 @@ if ($("#loginForm").length) {
     });
   });
 }
+
+// Handle aside bar
+if ($(".sidebar .nav-link").length) {
+  $(".sidebar .nav-link").on("click", function (e) {
+    var nextEl = $(this).next(); // Get the next sibling element
+    var parentEl = $(this).parent(); // Get the parent element
+
+    if (nextEl.length) {
+      e.preventDefault();
+      var myCollapse = new bootstrap.Collapse(nextEl[0]); // Use the DOM element
+
+      if (nextEl.hasClass("show")) {
+        myCollapse.hide();
+      } else {
+        myCollapse.show();
+        // Find other submenus with class 'show'
+        var openedSubmenu = parentEl.parent().find(".submenu.show");
+        // If it exists, close all of them
+        if (openedSubmenu.length) {
+          new bootstrap.Collapse(openedSubmenu[0]); // Use the DOM element
+        }
+      }
+    }
+  });
+}
