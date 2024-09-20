@@ -62,6 +62,7 @@ require "config/constants.php"
         href="assets/css/module-css/testimonial-section.css" />
     <link rel="stylesheet" href="assets/css/module-css/services-section.css" />
     <link rel="stylesheet" href="assets/css/module-css/footer-section.css" />
+    <link rel="stylesheet" href="assets/css/module-css/login-form.css" />
 
     <link
         href="assets/css/color/theme-color.css"

@@ -21,6 +21,8 @@
 
 "use strict";
 
+const ROOT_URL = "http://localhost:82/dashboard/rapidrescue/";
+
 //Hide Loading Box (Preloader)
 function handlePreloader() {
   if ($(".loader-wrap").length) {
@@ -744,17 +746,17 @@ if ($("#loginForm").length) {
     e.preventDefault();
 
     $.ajax({
-      url: "<?= ROOT_URL ?>logic/login-logic.php", // Ensure this path is correct
+      url: ROOT_URL + "logic/login-logic.php", // Ensure this path is correct
       type: "POST",
       data: $(this).serialize(),
       success: function (response) {
         // Handle login success or error response here
         if (response == "admin") {
-          window.location.href = "<?= ROOT_URL ?>admin/index.php"; // Redirect to admin dashboard
+          window.location.href = ROOT_URL + "admin/index.php"; // Redirect to admin dashboard
         } else if (response == "user") {
-          window.location.href = "<?= ROOT_URL ?>user_dashboard.php"; // Redirect to user dashboard
+          window.location.href = ROOT_URL + "user_dashboard.php"; // Redirect to user dashboard
         } else if (response == "driver") {
-          window.location.href = "<?= ROOT_URL ?>driver_dashboard.php"; // Redirect to driver dashboard
+          window.location.href = ROOT_URL + "driver_dashboard.php"; // Redirect to driver dashboard
         } else {
           alert("login failed!"); // Display error message
         }
