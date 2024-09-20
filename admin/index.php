@@ -67,7 +67,7 @@ if ($_SESSION['role'] != 'admin') {
             <div class="main-menu style1 navbar-expand-md navbar-light">
                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent" bis_skin_checked="1">
                     <ul class="navigation  clearfix scroll-nav">
-                        <li class="dropdown current">
+                        <li class="dropdown pad current">
                             <a class="remove-padding" href="#"><?= $_SESSION['firstname'] . " " . $_SESSION['lastname']  ?></a>
                             <ul class="dashboard-navigation">
                                 <li><a href="<?= ROOT_URL ?>login.php?id=<?= $_SESSION['userid'] ?>">Profile</a></li>

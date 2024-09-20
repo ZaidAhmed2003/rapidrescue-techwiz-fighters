@@ -19,9 +19,9 @@ require "config/database.php"
     <input type="password" name="password" required><br>
 
     <label>Role:</label>
-    <select disabled name="role" required>
+    <select name="role" required>
         <option value="user">User</option>
-
+        <option value="driver">Driver</option>
         <!-- Admin accounts should be created manually -->
     </select><br>
 

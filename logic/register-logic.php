@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $phonenumber = $_POST['phonenumber'];
     $password = $_POST['password'];
-    $role = $_POST['role'];  // user, driver, or admin
+    $role = $_POST['role'] ?? null;  // user, driver, or admin
     $date_of_birth = $_POST['date_of_birth'] ?? null;
     $address = $_POST['address'] ?? null;
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         (firstname, lastname, email, phonenumber, password, date_of_birth, address, role, created_at) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
     ");
-    $stmt->bind_param("ssssssss", $firstname, $lastname, $email, $phonenumber, $hashed_password, $date_of_birth, $address, $role);
+    $stmt->bind_param("ssssssss", $firstname, $lastname, $email, $phonenumber, $hashed_password, $date_of_birth, $address, $role );
 
     // Execute and check if the statement was successful
     if ($stmt->execute()) {

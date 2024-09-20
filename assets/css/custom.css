@@ -122,7 +122,7 @@ li.sidebar-item:hover > a {
 
 /* CSS used here will be applied after bootstrap.css */
 
-.dropdown {
+.pad {
   display: inline-block;
   margin-left: 20px;
   padding: 10px;
@@ -177,10 +177,57 @@ li.sidebar-item:hover > a {
   border-radius: 4px;
 }
 
-.panel {
-}
-
 .panel > .panel-heading {
   color: #fff;
   background-color: var(--thm-primary);
+}
+
+/* Login Form */
+
+#loginForm div input {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--thm-base);
+}
+#loginForm div label {
+  margin-bottom: 0.25rem;
+  font-size: 16px;
+}
+#loginForm div a {
+  font-size: 16px;
+}
+
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: var(--thm-base);
+}
+
+/* Button */
+
+.border-low {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  border-radius: 10px !important;
+}
+
+.border-low:before {
+  border-radius: 10px !important;
+}
+
+/* Tables */
+
+table thead tr {
+  font-size: 16px;
+}
+table tbody tr {
+  font-size: 14px;
+}
+table td {
+  padding: 0.25rem !important;
+}
+
+.action-btns:first-child {
+  color: var(--thm-primary);
+}
+.action-btns:last-child {
+  color: crimson;
 }

@@ -67,7 +67,7 @@ if ($_SESSION['role'] != 'admin') {
             <div class=" main-menu style1 navbar-expand-md navbar-light">
                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent" bis_skin_checked="1">
                     <ul class="navigation  clearfix scroll-nav">
-                        <li class="dropdown current">
+                        <li class="dropdown pad current">
                             <a class="remove-padding" href="#"><?= $_SESSION['firstname'] . " " . $_SESSION['lastname']  ?></a>
                             <ul class="dashboard-navigation">
                                 <li><a href="<?= ROOT_URL ?>login.php?id=<?= $_SESSION['userid'] ?>">Profile</a></li>
@@ -86,56 +86,54 @@ if ($_SESSION['role'] != 'admin') {
                     Manage Ambulances
                 </div>
             </div>
-            <div class="container-fluid">
+            <div class="">
                 <table class="w-100 text-center">
                     <?php
                     // $currentAdminId = $_SESSION['userid'];
-                    $ambulanceQuery = "SELECT * FROM driver d join ambu;ance s on d. ";
+                    $ambulanceQuery = "SELECT * from drivers d join ambulances a on d.ambulanceid=a.ambulanceid";
                     $ambulances = mysqli_query($connection, $ambulanceQuery)
                     ?>
                     <tbody>
                         <?php if (mysqli_num_rows($ambulances) > 0) : ?>
-                            <table>
+                            <table class="table table-striped text-center">
                                 <thead>
-                                    <tr class="row border">
-                                        <th class="col-1 border">Sno</th>
-                                        <th class="col-2 border">Type of Ambulance</th>
-                                        <th class="col-2 border">Ambulance Reg No.</th>
-                                        <th class="col-2 border">Name of Driver</th>
-                                        <th class="col-2 border">Phone Number of Driver</th>
-                                        <th class="col-2 border">Creation Date</th>
-                                        <th class="col-1 border">Action</th>
+                                    <tr data-breakpoints="xs" class=" border">
+                                        <th class="border">Sno</th>
+                                        <th class="border">Type of Ambulance</th>
+                                        <th class="border">Ambulance Reg No.</th>
+                                        <th class="border">Name of Driver</th>
+                                        <th class="border">Phone Number</th>
+                                        <th class="border">Creation Date</th>
+                                        <th class="border">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php while ($ambulance = mysqli_fetch_assoc($ambulances)) : ?>
-                                        <tr>
-                                            <td></td>
-                                            <td><?= $ambulance['equipment_level'] ?></td>
-                                            <td><?= $ambulance['vehicle_number'] ?></td>
-                                            <td><?= $ambulance['equipment_level'] ?></td>
-                                            <td><?= $ambulance['equipment_level'] ?></td>
-                                            <td><a href="<?= ROOT_URL ?>admin/edit-ambulance.php?id=<?= $ambulance['ambulanceid'] ?>" class="btn sm">Edit</a></td>
-                                            <td><a href="<?= ROOT_URL ?>admin/logic/delete-ambulance-logic.php?id=<?= $ambulance['ambulanceid'] ?>" class="btn sm danger">Delete</a></td>
-                                            <td><?= $user['is_admin'] ? 'Yes' : 'No'  ?></td>
+                                        <tr class=" border">
+                                            <td class="border"><?php
+                                                                $totalAmbulanceQuery = mysqli_query($connection, "Select * from ambulances");
+                                                                $ambulanceCount = mysqli_num_rows($totalAmbulanceQuery);
+                                                                echo $ambulanceCount;
+                                                                ?></td>
+                                            <td class="border"><?= $ambulance['equipment_level'] ?>
+                                            </td>
+                                            <td class="border"><?= $ambulance['vehicle_number'] ?></td>
+                                            <td class="border"><?= $ambulance['firstname'] . " ". $ambulance['lastname'] ?></td>
+                                            <td class="border"><?= $ambulance['phonenumber'] ?></td>
+                                            <td class="border"><?= $ambulance['created_at'] ?></td>
+                                            <td class="border"><a href="<?= ROOT_URL ?>admin/edit-ambulance.php?id=<?= $ambulance['ambulanceid'] ?>" class="p-1 action-btns">Edit</a>
+                                                <a href="<?= ROOT_URL ?>admin/logic/delete-ambulance-logic.php?id=<?= $ambulance['ambulanceid'] ?>" class="p-1 action-btns">Delete</a>
+                                            </td>
                                         </tr>
                                     <?php endwhile ?>
                                 </tbody>
                             </table>
+
+
                         <?php else : ?>
                             <div class=" text-center py-5    alert__message error"><?= "No Ambulances Found" ?></div>
                         <?php endif ?>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+
             </div>
         </div>
 

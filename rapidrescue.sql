@@ -36,8 +36,10 @@ CREATE TABLE emergency_requests (
 CREATE TABLE ambulances (
     ambulanceid INT AUTO_INCREMENT PRIMARY KEY,
     vehicle_number VARCHAR(50) UNIQUE NOT NULL,
-    equipment_level ENUM('basic', 'advanced') NOT NULL,
-    current_status ENUM('available', 'on_call', 'maintenance') DEFAULT 'available',
+    equipment_level ENUM('Basic Life Support (BLS)', 'Advanced Life Support (ALS)', 'Neonatal Ambulance', 'Air Ambulance', 'Patient Transport') NOT NULL,
+    capacity INT NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    current_status ENUM('available', 'dispatched', 'on_call', 'maintenance', 'in_service') DEFAULT 'available',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -58,8 +60,10 @@ CREATE TABLE drivers (
     phonenumber VARCHAR(15),
     license_number VARCHAR(100),
     location VARCHAR(255),
+    experience_years INT DEFAULT 0,
+    status ENUM('On Duty', 'Off Duty') DEFAULT 'On Duty',
     ambulanceid INT,
-    FOREIGN KEY (ambulanceid) REFERENCES ambulances(ambulanceid)
+    FOREIGN KEY (ambulanceid) REFERENCES ambulances(ambulanceid) ON DELETE SET NULL
 );
 
 CREATE TABLE feedback (

@@ -14,7 +14,6 @@ require "includes/header.php"
   require "includes/servicesection.php";
   require "includes/testimonialsection.php";
   require "includes/benefitssection.php";
-  require "includes/benefitssection.php";
   require "includes/blogsection.php";
   require "includes/contactform.php";
   require "includes/footer.php";
