@@ -124,7 +124,7 @@ if ($_SESSION['role'] != 'admin') {
                                             <td class="border"><?= $user['address'] ?></td>
                                             <td class="border"><?= $user['role'] ?></td>
                                             <td class="border">
-                                                <a href="<?= ROOT_URL ?>admin/edit-ambulance.php?id=<?= $user['userid'] ?>" class="p-1 action-btns">Edit</a>
+                                                <a href="<?= ROOT_URL ?>admin/edit-user.php?id=<?= $user['userid'] ?>" class="p-1 action-btns">Edit</a>
                                                 <a href="#" class="p-1 action-btns delete-user" data-id="<?= $user['userid'] ?>">Delete</a>
                                             </td>
 

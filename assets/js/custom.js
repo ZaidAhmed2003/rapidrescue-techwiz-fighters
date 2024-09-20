@@ -873,8 +873,6 @@ if ($(".delete-ambulance").length) {
   });
 }
 
-// HandleDelete USER
-
 // Handle Delete User
 if ($(".delete-user").length) {
   $(".delete-user").on("click", function (e) {
@@ -901,5 +899,33 @@ if ($(".delete-user").length) {
         },
       });
     }
+  });
+}
+
+// Handle Edit User
+if ($("#editUserForm").length) {
+  $("#editUserForm").on("submit", function (e) {
+    e.preventDefault(); // Prevent the form from submitting the default way
+
+    $.ajax({
+      url: ROOT_URL + "admin/logic/edit-user-logic.php", // URL of the PHP processing script
+      type: "POST",
+      data: $(this).serialize(), // Serialize the form data
+      success: function (response) {
+        alert(response);
+        // Handle success response
+        $("#responseMessage").html(
+          '<div class="alert alert-success">User updated successfully!</div>'
+        );
+      },
+      error: function (xhr) {
+        // Handle error response
+        $("#responseMessage").html(
+          '<div class="alert alert-danger">Error: ' +
+            xhr.responseText +
+            "</div>"
+        );
+      },
+    });
   });
 }
