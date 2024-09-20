@@ -122,3 +122,12 @@ VALUES
 ('Alex', 'Johnson', '555-9101', 'DL24681012', 'City Hospital', 3, 'On Duty', 3),
 ('Emily', 'Davis', '555-1122', 'DL13579111', 'Airport Base', 7, 'On Duty', 4),
 ('Michael', 'Brown', '555-3141', 'DL19283746', 'Main Street', 2, 'Off Duty', 5);
+
+
+INSERT INTO emts (firstname, lastname, certification, phonenumber, email) 
+VALUES 
+('John', 'Doe', 'Certified EMT', '123-456-7890', 'john.doe@example.com'),
+('Jane', 'Smith', 'Advanced EMT', '098-765-4321', 'jane.smith@example.com'),
+('Mike', 'Johnson', 'Certified EMT', '555-123-4567', 'mike.johnson@example.com'),
+('Emily', 'Davis', 'Advanced EMT', '555-987-6543', 'emily.davis@example.com'),
+('Chris', 'Brown', 'Paramedic', '555-111-2222', 'chris.brown@example.com');

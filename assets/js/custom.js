@@ -872,3 +872,34 @@ if ($(".delete-ambulance").length) {
     });
   });
 }
+
+// HandleDelete USER
+
+// Handle Delete User
+if ($(".delete-user").length) {
+  $(".delete-user").on("click", function (e) {
+    e.preventDefault(); // Prevent the default anchor behavior
+    const id = $(this).data("id");
+
+    if (confirm("Are you sure you want to delete this user?")) {
+      $.ajax({
+        url: ROOT_URL + "admin/logic/delete-user-logic.php", // Update with your script path
+        type: "POST",
+        data: { id: id },
+        dataType: "json",
+        success: function (response) {
+          if (response.status === "success") {
+            alert(response.message);
+            // Optionally, refresh the page or remove the ambulance from the UI
+            location.reload(); // or you can remove the deleted item from the DOM
+          } else {
+            alert(response.message);
+          }
+        },
+        error: function () {
+          alert("An error occurred while deleting the user.");
+        },
+      });
+    }
+  });
+}

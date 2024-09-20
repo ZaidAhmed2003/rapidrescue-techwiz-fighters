@@ -3,7 +3,7 @@ session_start();
 require "includes/header.php";
 
 
-if ($_SESSION['role'] != 'driver') {
+if ($_SESSION['role'] != 'user') {
     header("Location: " . ROOT_URL . "login.php");
     exit();
 }

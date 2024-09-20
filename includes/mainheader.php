@@ -6,7 +6,7 @@
       <div class="outer-box">
         <div class="header-top__left">
           <div class="main-logo-box">
-            <a href="index.html">
+            <a href="index.php">
               <img
                 width="110px"
                 src="assets/images/resources/logo.png"

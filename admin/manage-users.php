@@ -4,7 +4,7 @@ require "includes/header.php";
 
 
 if ($_SESSION['role'] != 'admin') {
-    header("Location: login.php");
+    header("Location:" . ROOT_URL . "login.php");
     exit();
 }
 ?>
@@ -62,7 +62,7 @@ if ($_SESSION['role'] != 'admin') {
     <main class="flex-grow w-100">
         <div class="d-flex justify-content-between align-items-center shadow-sm py-2 px-3">
             <h3>
-                Manage Ambulances
+                Manage Users
             </h3>
             <div class=" main-menu style1 navbar-expand-md navbar-light">
                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent" bis_skin_checked="1">
@@ -83,7 +83,7 @@ if ($_SESSION['role'] != 'admin') {
         <div class="container-fluid px-5 py-4">
             <div class="panel d-flex align-items-center justify-content-center">
                 <div class="panel-heading border w-100 text-center py-2">
-                    Manage Ambulances
+                    Manage Users
                 </div>
             </div>
             <div class="">
@@ -125,7 +125,7 @@ if ($_SESSION['role'] != 'admin') {
                                             <td class="border"><?= $user['role'] ?></td>
                                             <td class="border">
                                                 <a href="<?= ROOT_URL ?>admin/edit-ambulance.php?id=<?= $user['userid'] ?>" class="p-1 action-btns">Edit</a>
-                                                <a href="#" class="p-1 action-btns delete-ambulance" data-id="<?= $user['userid'] ?>">Delete</a>
+                                                <a href="#" class="p-1 action-btns delete-user" data-id="<?= $user['userid'] ?>">Delete</a>
                                             </td>
 
                                         </tr>
