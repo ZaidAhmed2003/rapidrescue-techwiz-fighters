@@ -8,7 +8,7 @@ $email = $_SESSION['add-user-data']['email'] ?? null;
 $phonenumber = $_SESSION['add-user-data']['phonenumber'] ?? null;
 $date_of_birth = $_POST['date_of_birth'] ?? null;
 $address = $_POST['address'] ?? null;
-$password = $_POST['password']; ?? null
+$password = $_POST['password'] ?? null;
 
 unset($_SESSION['add-user-data']);
 ?>

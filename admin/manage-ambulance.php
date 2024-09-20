@@ -90,7 +90,7 @@ if ($_SESSION['role'] != 'admin') {
                 <table class="w-100 text-center">
                     <?php
                     // $currentAdminId = $_SESSION['userid'];
-                    $ambulanceQuery = "SELECT * FROM ambulances";
+                    $ambulanceQuery = "SELECT * FROM driver d join ambu;ance s on d. ";
                     $ambulances = mysqli_query($connection, $ambulanceQuery)
                     ?>
                     <tbody>
