@@ -2,8 +2,6 @@
 -- database
 -- create database rapidrescue
 
-
-
 -- users table
 CREATE TABLE users (
     userid INT AUTO_INCREMENT PRIMARY KEY,
@@ -104,3 +102,23 @@ CREATE TABLE `rapidrescue`.`messages` (
   `subject` VARCHAR(100) NULL,
   `message` VARCHAR(255) NULL,
   PRIMARY KEY (`idmessages`));
+
+
+-- Sample Data Querys
+
+INSERT INTO ambulances (vehicle_number, equipment_level, capacity, location, current_status)
+VALUES 
+('ABC123', 'Basic Life Support (BLS)', 2, 'Downtown Station', 'available'),
+('DEF456', 'Advanced Life Support (ALS)', 4, 'Uptown Station', 'dispatched'),
+('GHI789', 'Neonatal Ambulance', 2, 'City Hospital', 'maintenance'),
+('JKL012', 'Air Ambulance', 6, 'Airport Base', 'in_service'),
+('MNO345', 'Patient Transport', 4, 'Main Street Station', 'on_call');
+
+
+INSERT INTO drivers (firstname, lastname, phonenumber, license_number, location, experience_years, status, ambulanceid)
+VALUES 
+('John', 'Doe', '555-1234', 'DL12345678', 'Downtown', 5, 'On Duty', 1),
+('Jane', 'Smith', '555-5678', 'DL87654321', 'Uptown', 8, 'Off Duty', 2),
+('Alex', 'Johnson', '555-9101', 'DL24681012', 'City Hospital', 3, 'On Duty', 3),
+('Emily', 'Davis', '555-1122', 'DL13579111', 'Airport Base', 7, 'On Duty', 4),
+('Michael', 'Brown', '555-3141', 'DL19283746', 'Main Street', 2, 'Off Duty', 5);

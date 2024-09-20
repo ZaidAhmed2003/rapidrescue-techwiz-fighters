@@ -185,14 +185,23 @@ li.sidebar-item:hover > a {
 /* Login Form */
 
 #loginForm div input {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--thm-base);
+  padding: 1.5rem 1rem;
+  border: 1px solid var(--thm-primary);
 }
 #loginForm div label {
+  color: var(--thm-base);
   margin-bottom: 0.25rem;
   font-size: 16px;
+  font-weight: 600;
 }
 #loginForm div a {
+  font-size: 16px;
+  color: var(--thm-primary);
+}
+#loginForm div a:hover {
+  color: var(--thm-base);
+}
+#loginForm div p {
   font-size: 16px;
 }
 
