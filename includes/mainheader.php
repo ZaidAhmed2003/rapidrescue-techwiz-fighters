@@ -73,13 +73,12 @@
                 class="collapse navbar-collapse show clearfix"
                 id="navbarSupportedContent">
                 <ul class="navigation clearfix scroll-nav">
-                  <li><a href="#banner">Home</a></li>
+                  <li><a href="index.php">Home</a></li>
                   <li><a href="#about">About Us</a></li>
                   <li><a href="#services">Services</a></li>
                   <li><a href="#blog">Blog</a></li>
-                  <li><a href="#contact">Contact</a></li>
                   <li><a href="<?= ROOT_URL ?>login.php?role=admin">Admin</a></li>
-                  <li><a href="<?= ROOT_URL ?>request-ambulance.php">Request An Ambulance</a></li>
+                  <li><a href="#requestAmbulanceForm">Requset An Ambulance</a></li>
                   <!-- <li class="dropdown">
                     <a href="#">Login</a>
                     <ul>
