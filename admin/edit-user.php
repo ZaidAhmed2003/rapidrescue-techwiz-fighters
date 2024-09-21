@@ -3,7 +3,7 @@ session_start();
 require "includes/header.php";
 
 if ($_SESSION['role'] != 'admin') {
-    header("Location: login.php");
+    header("Location:" . ROOT_URL . "logout.php");
     exit();
 }
 

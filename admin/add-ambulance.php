@@ -4,12 +4,12 @@ require "includes/header.php";
 
 
 if ($_SESSION['role'] != 'admin') {
-    header("Location: login.php");
+    header("Location:" . ROOT_URL . "logout.php");
     exit();
 }
 
 $drivers = [];
-$result = $connection->query("SELECT driverid, firstname, lastname FROM drivers WHERE status = 'On Duty'");
+$result = $connection->query("SELECT driverid, firstname, lastname FROM drivers WHERE status = 'On Duty' AND ambulanceid IS NULL");
 while ($row = $result->fetch_assoc()) {
     $drivers[] = $row;
 }
@@ -86,8 +86,10 @@ while ($row = $result->fetch_assoc()) {
             </div>
         </div>
 
+
         <div class="container-fluid p-4">
-            <form id="ambulanceForm">
+            <div class="#responseMessages"></div>
+            <form id="ambulanceForm" method="post" action="<?= ROOT_URL ?>admin/logic/add-ambulance-logic.php">
                 <div class="row">
                     <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
                         <label class="form-label" for="vehicle_number">Vehicle Number</label>
@@ -122,8 +124,8 @@ while ($row = $result->fetch_assoc()) {
                         </select>
                     </div>
                     <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
-                        <label class="form-label" for="driver_id">Assign Driver</label>
-                        <select name="driver_id" id="driver_id" class="form-control" required>
+                        <label class="form-label" for="driverid">Assign Driver</label>
+                        <select name="driverid" id="driverid" class="form-control" required>
                             <option value="">Select a Driver</option>
                             <?php foreach ($drivers as $driver): ?>
                                 <option value="<?= $driver['driverid'] ?>"><?= $driver['firstname'] . ' ' . $driver['lastname'] ?></option>

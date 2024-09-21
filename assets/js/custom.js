@@ -858,7 +858,7 @@ if ($(".delete-ambulance").length) {
     e.preventDefault(); // Prevent default form submission
     $.ajax({
       type: "POST",
-      url: "process-add-ambulance.php", // Create this file for processing
+      url: ROOT_URL + "admin/logic/add-ambulance-logic.php", // Create this file for processing
       data: $(this).serialize(),
       success: function (response) {
         $("#responseMessage").html(response); // Display response
@@ -925,6 +925,47 @@ if ($("#editUserForm").length) {
             xhr.responseText +
             "</div>"
         );
+      },
+    });
+  });
+}
+
+// Handle Edit Ambulance
+if ($("#editAmbulanceForm").length) {
+  $("#editAmbulanceForm").on("submit", function (e) {
+    e.preventDefault(); // Prevent the form from submitting the default way
+
+    // Show loading state
+    $("#responseMessage").html(
+      '<div class="alert alert-info">Processing...</div>'
+    );
+
+    $.ajax({
+      url: ROOT_URL + "admin/logic/edit-ambulance-logic.php", // URL of the PHP processing script
+      type: "POST",
+      data: $(this).serialize(), // Serialize the form data
+      success: function (response) {
+        alert(response  );
+        // Handle success response
+        $("#responseMessage").html(
+          '<div class="alert alert-success">Ambulance updated successfully!</div>'
+        );
+        // Optionally clear the form or redirect the user
+        $("#editAmbulanceForm")[0].reset(); // Reset the form
+      },
+      error: function (xhr) {
+        // Handle error response
+        $("#responseMessage").html(
+          '<div class="alert alert-danger">Error: ' +
+            xhr.responseText +
+            "</div>"
+        );
+      },
+      complete: function () {
+        // Optionally remove loading state
+        setTimeout(() => {
+          $("#responseMessage").html(""); // Clear loading message
+        }, 1000);
       },
     });
   });

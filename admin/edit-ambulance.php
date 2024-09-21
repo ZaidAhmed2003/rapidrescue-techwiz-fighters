@@ -2,11 +2,24 @@
 session_start();
 require "includes/header.php";
 
-
 if ($_SESSION['role'] != 'admin') {
     header("Location:" . ROOT_URL . "logout.php");
     exit();
 }
+
+// Fetch user details based on user ID passed in the query string
+$ambulanceId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$stmt = $connection->prepare("SELECT * FROM ambulances WHERE ambulanceid = ?");
+$stmt->bind_param("i", $ambulanceId);
+$stmt->execute();
+$result = $stmt->get_result();
+$ambulance = $result->fetch_assoc();
+
+if (!$ambulance) {
+    echo "Ambulance not found.";
+    exit();
+}
+
 ?>
 
 <body class="dashboard-body d-flex">
@@ -62,7 +75,7 @@ if ($_SESSION['role'] != 'admin') {
     <main class="flex-grow w-100">
         <div class="d-flex justify-content-between align-items-center shadow-sm py-2 px-3">
             <h3>
-                Add User
+                Edit Ambulance
             </h3>
             <div class="main-menu style1 navbar-expand-md navbar-light">
                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent" bis_skin_checked="1">
@@ -81,49 +94,60 @@ if ($_SESSION['role'] != 'admin') {
         </div>
 
         <div class="container-fluid p-4">
-            <form action="<?= ROOT_URL ?>admin/logic/add-user-logic.php" method="post">
+            <div id="responseMessage"></div>
+            <form id="editAmbulanceForm" method="post" action="<?= ROOT_URL ?>admin/logic/add-ambulance-logic.php">
                 <div class="row">
-                    <div class="col-12 col-md-6 form-outline mb-3">
-                        <label class="form-label" for="firstname">First Name</label>
-                        <input type="text" name="firstname" id="firstname" class="form-control"
-                            placeholder="first name" required />
+                    <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
+                        <label class="form-label" for="vehicle_number">Vehicle Number</label>
+                        <input type="text" name="vehicle_number" id="vehicle_number" class="form-control" placeholder="Vehicle Number" value="<?= htmlspecialchars($ambulance['vehicle_number']) ?>" required />
                     </div>
-                    <div class="col-12 col-md-6 form-outline mb-3">
-                        <label class="form-label" for="lastname">Last Name</label>
-                        <input type="text" name="lastname" id="lastname" class="form-control"
-                            placeholder="last name" required />
+                    <div class=" col-12 col-md-6 col-xl-4 form-outline mb-3">
+                        <label class="form-label" for="capacity">Capacity</label>
+                        <input type="number" name="capacity" id="capacity" class="form-control" placeholder="Capacity" value="<?= htmlspecialchars($ambulance['capacity']) ?>" required />
                     </div>
-                    <div class="col-12 col-md-6 form-outline mb-3">
-                        <label class="form-label" for="email">Email</label>
-                        <input type="email" name="email" id="email" class="form-control"
-                            placeholder="email address" required />
-                    </div>
-                    <div class="col-12 col-md-6 form-outline mb-3">
-                        <label class="form-label" for="phonenumber">Phone Number</label>
-                        <input type="text" name="phonenumber" id="phonenumber" class="form-control"
-                            placeholder="phone number" required />
-                    </div>
-                    <div class="col-12 col-md-6 form-outline mb-4">
-                        <label class="form-label" for="password">Password</label>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="enter your password" required />
-                    </div>
-                    <div class="col-12 col-md-6 form-outline mb-3">
-                        <label class="form-label" for="dateofbirth">Date of Birth</label>
-                        <input type="date" name="dateofbirth" id="dateofbirth" class="form-control"
-                            placeholder="Date of Birth" />
-                    </div>
-                    <div class="col-12 col-md-6 form-outline mb-3">
-                        <label class="form-label" for="address">Address</label>
-                        <input type="text" name="address" id="address" class="form-control"
-                            placeholder="Enter your address"></input>
+                    <div class=" col-12 col-md-6 col-xl-4 form-outline mb-3">
+                        <label class="form-label" for="location">Location</label>
+                        <input type="text" name="location" id="location" class="form-control" value="<?= htmlspecialchars($ambulance['location']) ?>" placeholder=" Location" required />
                     </div>
                     <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
-                        <label class="form-label" for="role">Role</label>
-                        <select name="role" id="role" class="form-control" required>
-                            <option value="user">User</option>
-                            <option value="driver">Driver</option>
-                            <option value="admin">Admin</option>
+                        <label class="form-label" for="equipment_level">Equipment Level</label>
+                        <select name="equipment_level" id="equipment_level" class="form-control" required>
+                            <option value="Basic Life Support (BLS)" <?= $ambulance['equipment_level'] == 'Basic Life Support (BLS)' ? 'selected' : '' ?>>Basic Life Support (BLS)</option>
+                            <option value="Advanced Life Support (ALS)" <?= $ambulance['equipment_level'] == 'Advanced Life Support (ALS)' ? 'selected' : '' ?>>Advanced Life Support (ALS)</option>
+                            <option value="Neonatal Ambulance" <?= $ambulance['equipment_level'] == 'Neonatal Ambulance' ? 'selected' : '' ?>>Neonatal Ambulance</option>
+                            <option value="Air Ambulance" <?= $ambulance['equipment_level'] == 'Air Ambulance' ? 'selected' : '' ?>>Air Ambulance</option>
+                            <option value="Patient Transport" <?= $ambulance['equipment_level'] == 'Patient Transport' ? 'selected' : '' ?>>Patient Transport</option>
                         </select>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
+                        <label class="form-label" for="current_status">Current Status</label>
+                        <select name="current_status" id="current_status" class="form-control" required>
+                            <option value="available" <?= $ambulance['current_status'] == 'available' ? 'selected' : '' ?>>Available</option>
+                            <option value="on_call" <?= $ambulance['current_status'] == 'on_call' ? 'selected' : '' ?>>On Call</option>
+                            <option value="dispatched" <?= $ambulance['current_status'] == 'dispatched' ? 'selected' : '' ?>>Dispatched</option>
+                            <option value="maintenance" <?= $ambulance['current_status'] == 'maintenance' ? 'selected' : '' ?>>Maintenance</option>
+                            <option value="in_service" <?= $ambulance['current_status'] == 'in_service' ? 'selected' : '' ?>>In Service</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
+                        <?php
+                        $drivers = [];
+                        $result = $connection->query("SELECT driverid, firstname, lastname FROM drivers WHERE status = 'On Duty' AND ambulanceid IS NULL");
+                        while ($row = $result->fetch_assoc()) {
+                            $drivers[] = $row;
+                        }
+                        ?>
+
+                        <label class="form-label" for="driverid">Assign Driver</label>
+                        <select name="driverid" id="driverid" class="form-control" required>
+                            <option value="">Select a Driver</option>
+                            <?php foreach ($drivers as $driver): ?>
+                                <option value="<?= $driver['driverid'] ?>"><?= $driver['firstname'] . ' ' . $driver['lastname'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        </>s
+
                     </div>
                 </div>
                 <div class="button-box">
@@ -137,12 +161,11 @@ if ($_SESSION['role'] != 'admin') {
                         class="btn-one border-low"
                         type="submit"
                         data-loading-text="Please wait...">
-                        <span class="txt"> Add User </span>
+                        <span class="txt"> Update Ambulance </span>
                     </button>
                 </div>
 
             </form>
-            <div id="responseMessage" class="mt-3"></div>
         </div>
     </main>
 

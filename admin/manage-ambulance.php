@@ -4,7 +4,7 @@ require "includes/header.php";
 
 
 if ($_SESSION['role'] != 'admin') {
-    header("Location: login.php");
+    header("Location:" . ROOT_URL . "logout.php");
     exit();
 }
 ?>
@@ -90,7 +90,7 @@ if ($_SESSION['role'] != 'admin') {
                 <table class="w-100 text-center">
                     <?php
                     $ambulanceQuery = "
-                    SELECT a.*, d.firstname, d.lastname, d.phonenumber 
+                    SELECT a.*, d.firstname, d.lastname, d.phonenumber
                     FROM ambulances a 
                     LEFT JOIN drivers d ON a.ambulanceid = d.ambulanceid
                 ";
@@ -107,6 +107,7 @@ if ($_SESSION['role'] != 'admin') {
                                         <th class="border">Ambulance Reg No.</th>
                                         <th class="border">Name of Driver</th>
                                         <th class="border">Phone Number</th>
+
                                         <th class="border">Creation Date</th>
                                         <th class="border">Action</th>
                                     </tr>
@@ -125,6 +126,7 @@ if ($_SESSION['role'] != 'admin') {
                                                                     ? $ambulance['firstname'] . " " . $ambulance['lastname']
                                                                     : 'Not Assigned' ?></td>
                                             <td class="border"><?= $ambulance['phonenumber'] ?></td>
+
                                             <td class="border"><?= $ambulance['created_at'] ?></td>
                                             <td class="border">
                                                 <a href="<?= ROOT_URL ?>admin/edit-ambulance.php?id=<?= $ambulance['ambulanceid'] ?>" class="p-1 action-btns">Edit</a>

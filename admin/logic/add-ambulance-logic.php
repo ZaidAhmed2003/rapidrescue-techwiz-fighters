@@ -1,5 +1,5 @@
 <?php
-require "admin/includes/header.php";
+require "../config/database.php";
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -8,32 +8,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $capacity = filter_var($_POST['capacity'], FILTER_SANITIZE_NUMBER_INT);
     $location = filter_var($_POST['location'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $current_status = filter_var($_POST['current_status'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $driver_id = filter_var($_POST['driver_id'], FILTER_SANITIZE_NUMBER_INT);
-
-    require '../config/database.php';
+    $driverid = filter_var($_POST['driverid'], FILTER_SANITIZE_NUMBER_INT);
 
     // Insert ambulance into the database
     $stmt = $connection->prepare("INSERT INTO ambulances (vehicle_number, equipment_level, capacity, location, current_status) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("ssiss", $vehicle_number, $equipment_level, $capacity, $location, $current_status);
 
     if ($stmt->execute()) {
-        $ambulanceid = $stmt->insert_id; // Get the ID of the inserted ambulance
+        $ambulanceid = $stmt->insert_id; // Get the ID of the inserted ambulance 
 
         // Assign driver to the ambulance
-        if (isset($ambulanceid) && !empty($driver_id)) {
-            $stmt = $connection->prepare("UPDATE drivers SET ambulanceid = ? WHERE id = ?");
-            $stmt->bind_param("ii", $ambulanceid, $driver_id);
+        if (isset($ambulanceid) && !empty($driverid)) {
+            $stmt = $connection->prepare("UPDATE drivers SET ambulanceid = ? WHERE driverid = ?");
+            $stmt->bind_param("ii", $ambulanceid, $driverid);
 
             if ($stmt->execute()) {
-                $_SESSION['message'] = "Ambulance and driver assigned successfully.";
-                header("Location: manage-ambulance.php");
+                echo "Ambulance and driver assigned successfully.";
                 exit();
             } else {
-                $_SESSION['error'] = "Failed to assign driver. Please try again.";
+                echo "Failed to assign driver. Please try again.";
             }
         }
     } else {
-        $_SESSION['error'] = "Failed to add ambulance. Please try again.";
+        echo "Failed to add ambulance. Please try again.";
     }
 
     $stmt->close();
