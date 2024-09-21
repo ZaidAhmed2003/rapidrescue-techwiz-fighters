@@ -823,56 +823,6 @@ if ($(".sidebar .nav-link").length) {
   });
 }
 
-// Handle Delete Ambulance
-if ($(".delete-ambulance").length) {
-  $(".delete-ambulance").on("click", function (e) {
-    e.preventDefault(); // Prevent the default anchor behavior
-    const id = $(this).data("id");
-
-    if (confirm("Are you sure you want to delete this ambulance?")) {
-      $.ajax({
-        url: ROOT_URL + "admin/logic/delete-ambulance-logic.php", // Update with your script path
-        type: "POST",
-        data: { id: id },
-        dataType: "json",
-        success: function (response) {
-          if (response.status === "success") {
-            alert(response.message);
-            // Optionally, refresh the page or remove the ambulance from the UI
-            location.reload(); // or you can remove the deleted item from the DOM
-          } else {
-            alert(response.message);
-          }
-        },
-        error: function () {
-          alert("An error occurred while deleting the ambulance.");
-        },
-      });
-    }
-  });
-}
-
-// Handle ADD Ambulance
-if ($(".delete-ambulance").length) {
-  $("#ambulanceForm").on("submit", function (e) {
-    e.preventDefault(); // Prevent default form submission
-    $.ajax({
-      type: "POST",
-      url: ROOT_URL + "admin/logic/add-ambulance-logic.php", // Create this file for processing
-      data: $(this).serialize(),
-      success: function (response) {
-        $("#responseMessage").html(response); // Display response
-        $("#ambulanceForm")[0].reset(); // Reset form
-      },
-      error: function () {
-        $("#responseMessage").html(
-          '<div class="alert alert-danger">There was an error processing your request.</div>'
-        );
-      },
-    });
-  });
-}
-
 // Handle Delete User
 if ($(".delete-user").length) {
   $(".delete-user").on("click", function (e) {
@@ -984,58 +934,55 @@ if ($("#editUserForm").length) {
   });
 }
 
-// request Ambulance
+// Handle Delete Ambulance
+if ($(".delete-ambulance").length) {
+  $(".delete-ambulance").on("click", function (e) {
+    e.preventDefault(); // Prevent the default anchor behavior
+    const id = $(this).data("id");
 
-//Requst Ambulance Form Validation
-// if ($("#ambulance-request-form").length) {
-//   $("#ambulance-request-form").validate({
-//     submitHandler: function (form) {
-//       var form_btn = $(form).find('button[type="submit"]');
-//       var form_result_div = "#form-result";
-//       $(form_result_div).remove();
-//       form_btn.before(
-//         '<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>'
-//       );
-//       var form_btn_old_msg = form_btn.html();
-//       form_btn.html(form_btn.prop("disabled", true).data("loading-text"));
+    if (confirm("Are you sure you want to delete this ambulance?")) {
+      $.ajax({
+        url: ROOT_URL + "admin/logic/delete-ambulance-logic.php", // Update with your script path
+        type: "POST",
+        data: { id: id },
+        dataType: "json",
+        success: function (response) {
+          if (response.status === "success") {
+            alert(response.message);
+            // Optionally, refresh the page or remove the ambulance from the UI
+            location.reload(); // or you can remove the deleted item from the DOM
+          } else {
+            alert(response.message);
+          }
+        },
+        error: function () {
+          alert("An error occurred while deleting the ambulance.");
+        },
+      });
+    }
+  });
+}
 
-//       // Perform the AJAX request
-//       $.ajax({
-//         url: ROOT_URL + "logic/request-ambulance-logic.php", // Path to the logic PHP file
-//         type: "POST",
-//         data: $(form).serialize(), // Serialize the form data
-//         dataType: "json", // Expect JSON response
-//         success: function (data) {
-//           alert(data);
-//           // Reset form fields if submission is successful
-//           if (data.status === "true") {
-//             $(form).find(".form-control").val(""); // Clear form fields
-//             form.reset(); // Clear all form fields
-//           }
-
-//           // Enable the button and restore its original text
-//           form_btn.prop("disabled", false).html(form_btn_old_msg);
-
-//           // Display success or error message
-//           $(form_result_div).html(data.message).fadeIn("slow");
-//           setTimeout(function () {
-//             $(form_result_div).fadeOut("slow");
-//           }, 6000);
-//         },
-//         error: function () {
-//           // Handle error
-//           $(form_result_div)
-//             .html("Something went wrong. Please try again.")
-//             .fadeIn("slow");
-//           setTimeout(function () {
-//             $(form_result_div).fadeOut("slow");
-//           }, 6000);
-//           form_btn.prop("disabled", false).html(form_btn_old_msg);
-//         },
-//       });
-//     },
-//   });
-// }
+// Handle ADD Ambulance
+if ($(".delete-ambulance").length) {
+  $("#ambulanceForm").on("submit", function (e) {
+    e.preventDefault(); // Prevent default form submission
+    $.ajax({
+      type: "POST",
+      url: ROOT_URL + "admin/logic/add-ambulance-logic.php", // Create this file for processing
+      data: $(this).serialize(),
+      success: function (response) {
+        $("#responseMessage").html(response); // Display response
+        $("#ambulanceForm")[0].reset(); // Reset form
+      },
+      error: function () {
+        $("#responseMessage").html(
+          '<div class="alert alert-danger">There was an error processing your request.</div>'
+        );
+      },
+    });
+  });
+}
 
 // Handle ADD Ambulance
 if ($("#ambulance-request-form").length) {
