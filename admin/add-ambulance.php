@@ -123,15 +123,6 @@ while ($row = $result->fetch_assoc()) {
                             <option value="in_service">In Service</option>
                         </select>
                     </div>
-                    <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
-                        <label class="form-label" for="driverid">Assign Driver</label>
-                        <select name="driverid" id="driverid" class="form-control" required>
-                            <option value="">Select a Driver</option>
-                            <?php foreach ($drivers as $driver): ?>
-                                <option value="<?= $driver['driverid'] ?>"><?= $driver['firstname'] . ' ' . $driver['lastname'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
                 </div>
                 <div class="button-box">
                     <input

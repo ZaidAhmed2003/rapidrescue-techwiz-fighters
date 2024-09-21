@@ -8,7 +8,7 @@ if ($_SESSION['role'] != 'admin') {
 }
 
 // Fetch user details based on user ID passed in the query string
-$ambulanceId = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$ambulanceId = $_GET['id'];
 $stmt = $connection->prepare("SELECT * FROM ambulances WHERE ambulanceid = ?");
 $stmt->bind_param("i", $ambulanceId);
 $stmt->execute();
@@ -95,7 +95,9 @@ if (!$ambulance) {
 
         <div class="container-fluid p-4">
             <div id="responseMessage"></div>
-            <form id="editAmbulanceForm" method="post" action="<?= ROOT_URL ?>admin/logic/add-ambulance-logic.php">
+            <form id="editAmbulanceForm" method="post" action="<?= ROOT_URL ?>admin/logic/edit-ambulance-logic.php">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($ambulance['ambulanceid']) ?>">
+
                 <div class="row">
                     <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
                         <label class="form-label" for="vehicle_number">Vehicle Number</label>
@@ -129,25 +131,6 @@ if (!$ambulance) {
                             <option value="maintenance" <?= $ambulance['current_status'] == 'maintenance' ? 'selected' : '' ?>>Maintenance</option>
                             <option value="in_service" <?= $ambulance['current_status'] == 'in_service' ? 'selected' : '' ?>>In Service</option>
                         </select>
-                    </div>
-                    <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
-                        <?php
-                        $drivers = [];
-                        $result = $connection->query("SELECT driverid, firstname, lastname FROM drivers WHERE status = 'On Duty' AND ambulanceid IS NULL");
-                        while ($row = $result->fetch_assoc()) {
-                            $drivers[] = $row;
-                        }
-                        ?>
-
-                        <label class="form-label" for="driverid">Assign Driver</label>
-                        <select name="driverid" id="driverid" class="form-control" required>
-                            <option value="">Select a Driver</option>
-                            <?php foreach ($drivers as $driver): ?>
-                                <option value="<?= $driver['driverid'] ?>"><?= $driver['firstname'] . ' ' . $driver['lastname'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        </>s
-
                     </div>
                 </div>
                 <div class="button-box">

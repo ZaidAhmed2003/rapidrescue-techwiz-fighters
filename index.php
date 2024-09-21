@@ -9,6 +9,7 @@ require "includes/header.php"
   require "includes/pagedirection.php";
   require "includes/switchermenu.php";
   require "includes/mainheader.php";
+  require "includes/banner.php";
   require "includes/aboutsection.php";
   require "includes/featuresection.php";
   require "includes/servicesection.php";
