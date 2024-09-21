@@ -40,11 +40,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = 'Address is required.';
     }
 
-    // If there are validation errors, display them and exit
+    // Validate role
+    $allowed_roles = ['user', 'admin', 'driver'];
+    if (!in_array($role, $allowed_roles)) {
+        $errors[] = 'Invalid role.';
+    }
+
+    // If there are validation errors, return JSON response
     if (!empty($errors)) {
-        foreach ($errors as $error) {
-            echo "<p>$error</p>";
-        }
+        echo json_encode(['error' => true, 'message' => $errors[0]]);
         exit();
     }
 
@@ -55,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $query->get_result();
 
     if ($result->num_rows > 0) {
-        echo "Email is already registered.";
+        echo json_encode(['error' => true, 'message' => 'Email is already registered.']);
         exit();
     }
 
@@ -72,10 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Execute the query and check for success
     if ($stmt->execute()) {
-        echo "Registration successful!";
-        header("Location:" . ROOT_URL . "admin/manage-users.php");
+        echo json_encode(['error' => false, 'message' => 'Registration successful!']);
     } else {
-        echo "Registration failed. Please try again.";
+        echo json_encode(['error' => true, 'message' => 'Registration failed. Please try again.']);
     }
 
     // Close the statement and connection

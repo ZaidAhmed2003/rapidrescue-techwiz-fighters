@@ -78,7 +78,7 @@
                                 <ul>
                                     <li><a href="#about">About</a></li>
                                     <li><a href="#services">Our Services</a></li>
-                                    <li><a href="#contact">Contact</a></li>
+                                    <li><a href="#requestAmbulanceForm">Contact</a></li>
                                     <li><a href="<?= ROOT_URL ?>login.php?role=admin">Admin</a></li>
                                     <li><a href="<?= ROOT_URL ?>login.php?role=user">User</a></li>
                                     <li><a href="<?= ROOT_URL ?>login.php?role=driver">Driver</a></li>

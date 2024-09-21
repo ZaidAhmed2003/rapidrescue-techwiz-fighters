@@ -902,28 +902,75 @@ if ($(".delete-user").length) {
   });
 }
 
+// Handle Add User
+if ($("#add-user-form").length) {
+  $("#add-user-form").on("submit", function (e) {
+    e.preventDefault(); // Prevent the form from submitting the default way
+    $("#responseMessage").html(
+      '<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>'
+    );
+    $.ajax({
+      url: ROOT_URL + "admin/logic/add-user-logic.php", // URL of the PHP processing script
+      type: "POST",
+      data: $(this).serialize(), // Serialize the form data
+      dataType: "json", // Expect a JSON response
+      success: function (response) {
+        if (response.error) {
+          $("#responseMessage").html(
+            `<div class="alert alert-danger">${response.message}</div>`
+          );
+          setTimeout(function () {
+            $("#responseMessage").html(""); // Clear the error message after 3 seconds
+          }, 3000);
+        } else {
+          $("#responseMessage").html(
+            `<div class="alert alert-success">${response.message}</div>`
+          );
+          setTimeout(() => {
+            window.location.href = ROOT_URL + "admin/manage-users.php";
+          }, 1000);
+        }
+      },
+      error: function (xhr, status, error) {
+        // Handle error response
+        $("#responseMessage").html(
+          '<div class="alert alert-danger">Error: ' + error + "</div>"
+        );
+      },
+    });
+  });
+}
+
 // Handle Edit User
 if ($("#editUserForm").length) {
   $("#editUserForm").on("submit", function (e) {
     e.preventDefault(); // Prevent the form from submitting the default way
-
+    $("#responseMessage").html(
+      '<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>'
+    );
     $.ajax({
       url: ROOT_URL + "admin/logic/edit-user-logic.php", // URL of the PHP processing script
       type: "POST",
       data: $(this).serialize(), // Serialize the form data
+      dataType: "json", // Expect a JSON response
       success: function (response) {
-        alert(response);
-        // Handle success response
-        $("#responseMessage").html(
-          '<div class="alert alert-success">User updated successfully!</div>'
-        );
+        if (response.success) {
+          $("#responseMessage").html(
+            `<div class="alert alert-success">${response.message}</div>`
+          );
+          setTimeout(() => {
+            window.location.href = ROOT_URL + "admin/manage-users.php";
+          }, 1000);
+        } else {
+          $("#responseMessage").html(
+            `<div class="alert alert-danger">${response.message}</div>`
+          );
+        }
       },
-      error: function (xhr) {
+      error: function (xhr, status, error) {
         // Handle error response
         $("#responseMessage").html(
-          '<div class="alert alert-danger">Error: ' +
-            xhr.responseText +
-            "</div>"
+          '<div class="alert alert-danger">Error: ' + error + "</div>"
         );
       },
     });
