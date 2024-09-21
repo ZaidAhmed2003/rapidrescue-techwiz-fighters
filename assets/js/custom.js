@@ -878,7 +878,6 @@ if ($(".delete-user").length) {
   $(".delete-user").on("click", function (e) {
     e.preventDefault(); // Prevent the default anchor behavior
     const id = $(this).data("id");
-
     if (confirm("Are you sure you want to delete this user?")) {
       $.ajax({
         url: ROOT_URL + "admin/logic/delete-user-logic.php", // Update with your script path
@@ -886,16 +885,24 @@ if ($(".delete-user").length) {
         data: { id: id },
         dataType: "json",
         success: function (response) {
-          if (response.status === "success") {
-            alert(response.message);
-            // Optionally, refresh the page or remove the ambulance from the UI
-            location.reload(); // or you can remove the deleted item from the DOM
+          if (response.error) {
+            $("#responseMessage").html(
+              `<div class="alert alert-danger">${response.message}</div>`
+            );
+            setTimeout(function () {
+              $("#responseMessage").html(""); // Clear the error message after 3 seconds
+            }, 3000);
           } else {
-            alert(response.message);
+            $("#responseMessage").html(
+              `<div class="alert alert-success">${response.message}</div>`
+            );
+            location.reload();
           }
         },
-        error: function () {
-          alert("An error occurred while deleting the user.");
+        error: function (xhr, status, error) {
+          $("#responseMessage").html(
+            '<div class="alert alert-danger">Error: ' + error + "</div>"
+          );
         },
       });
     }
