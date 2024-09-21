@@ -932,52 +932,77 @@ if ($("#editUserForm").length) {
 
 // request Ambulance
 
-//Contact Form Validation
-if ($("#requestAmbulanceForm").length) {
-  $("#requestAmbulanceForm").validate({
-    submitHandler: function (form) {
-      var form_btn = $(form).find('button[type="submit"]');
-      var form_result_div = "#form-result";
-      $(form_result_div).remove();
-      form_btn.before(
-        '<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>'
-      );
-      var form_btn_old_msg = form_btn.html();
-      form_btn.html(form_btn.prop("disabled", true).data("loading-text"));
+//Requst Ambulance Form Validation
+// if ($("#ambulance-request-form").length) {
+//   $("#ambulance-request-form").validate({
+//     submitHandler: function (form) {
+//       var form_btn = $(form).find('button[type="submit"]');
+//       var form_result_div = "#form-result";
+//       $(form_result_div).remove();
+//       form_btn.before(
+//         '<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>'
+//       );
+//       var form_btn_old_msg = form_btn.html();
+//       form_btn.html(form_btn.prop("disabled", true).data("loading-text"));
 
-      // Perform the AJAX request
-      $.ajax({
-        url: "logic/request-ambulance-logic.php", // Path to the logic PHP file
-        type: "POST",
-        data: $(form).serialize(), // Serialize the form data
-        dataType: "json", // Expect JSON response
-        success: function (data) {
-          // Reset form fields if submission is successful
-          if (data.status === "true") {
-            $(form).find(".form-control").val(""); // Clear form fields
-            form.reset(); // Clear all form fields
-          }
+//       // Perform the AJAX request
+//       $.ajax({
+//         url: ROOT_URL + "logic/request-ambulance-logic.php", // Path to the logic PHP file
+//         type: "POST",
+//         data: $(form).serialize(), // Serialize the form data
+//         dataType: "json", // Expect JSON response
+//         success: function (data) {
+//           alert(data);
+//           // Reset form fields if submission is successful
+//           if (data.status === "true") {
+//             $(form).find(".form-control").val(""); // Clear form fields
+//             form.reset(); // Clear all form fields
+//           }
 
-          // Enable the button and restore its original text
-          form_btn.prop("disabled", false).html(form_btn_old_msg);
+//           // Enable the button and restore its original text
+//           form_btn.prop("disabled", false).html(form_btn_old_msg);
 
-          // Display success or error message
-          $(form_result_div).html(data.message).fadeIn("slow");
-          setTimeout(function () {
-            $(form_result_div).fadeOut("slow");
-          }, 6000);
-        },
-        error: function () {
-          // Handle error
-          $(form_result_div)
-            .html("Something went wrong. Please try again.")
-            .fadeIn("slow");
-          setTimeout(function () {
-            $(form_result_div).fadeOut("slow");
-          }, 6000);
-          form_btn.prop("disabled", false).html(form_btn_old_msg);
-        },
-      });
-    },
+//           // Display success or error message
+//           $(form_result_div).html(data.message).fadeIn("slow");
+//           setTimeout(function () {
+//             $(form_result_div).fadeOut("slow");
+//           }, 6000);
+//         },
+//         error: function () {
+//           // Handle error
+//           $(form_result_div)
+//             .html("Something went wrong. Please try again.")
+//             .fadeIn("slow");
+//           setTimeout(function () {
+//             $(form_result_div).fadeOut("slow");
+//           }, 6000);
+//           form_btn.prop("disabled", false).html(form_btn_old_msg);
+//         },
+//       });
+//     },
+//   });
+// }
+
+// Handle ADD Ambulance
+if ($("#ambulance-request-form").length) {
+  $("#ambulance-request-form").on("submit", function (e) {
+    e.preventDefault(); // Prevent default form submission
+    $.ajax({
+      type: "POST",
+      url: ROOT_URL + "logic/request-ambulance-logic.php", // Create this file for processing
+      data: $(this).serialize(),
+      success: function (response) {
+        alert(response);
+        $("#responseMessage").html(
+          '<div class="alert alert-success">${response}</div>'
+        ); // Display response
+        $("#ambulance-request-form")[0].reset(); // Reset form
+      },
+      error: function () {
+        $("#responseMessage").html(
+          '<div class="alert alert-danger">There was an error processing your request.</div>'
+        );
+      },
+    });
   });
 }

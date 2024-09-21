@@ -20,11 +20,11 @@ if ($_SESSION['role'] != 'admin') {
                     <a class="" href="<?= ROOT_URL ?>admin/">Dashboard</a>
                 </li>
                 <li class="sidebar-item nav-item has-submenu border-bottom ">
-                    <a class="nav-link" href="#" role="button" data-bs-target="#dispatchControl" data-bs-toggle="collapse" aria-expanded="false">
-                        <i class="fa fa-book"></i> Dispatch Control
+                    <a class=" dropdown-toggle nav-link" href="#" role="button" data-bs-target="#dispatchControl" data-bs-toggle="collapse" aria-expanded="false">
+                        <i class="fa fa-book"></i> Ambulance Request
                     </a>
                     <ul class="sidebar-item submenu collapse" id="dispatchControl">
-                        <li><a class="nav-link" href="<?= ROOT_URL ?>admin/add-ambulance.php">Add Ambulance</a></li>
+                        <li><a class="nav-link" href="<?= ROOT_URL ?>admin/manage-request.php">All Request</a></li>
                         <li><a class="nav-link" href="<?= ROOT_URL ?>admin/manage-ambulance.php">Manage Ambulance</a></li>
                     </ul>
                 </li>

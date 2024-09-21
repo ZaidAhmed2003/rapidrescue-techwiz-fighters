@@ -1,4 +1,5 @@
 <!--Start Main Contact Form Area-->
+
 <section id="requestAmbulanceForm" class="main-contact-form-area mt-10">
     <div class="container">
         <div class="sec-title text-center">
@@ -17,7 +18,7 @@
                         id="ambulance-request-form"
                         name="ambulance_request_form"
                         class="default-form2"
-                        action=""
+                        action="<?= ROOT_URL ?>logic/ambulance-request-form.php"
                         method="post">
                         <div class="row">
                             <div class="col-xl-6">
@@ -25,10 +26,10 @@
                                     <div class="input-box">
                                         <input
                                             type="text"
-                                            name="patientName"
+                                            name="full_name"
                                             id="fullName"
-                                            placeholder="Patient Name"
-                                            required="" />
+                                            placeholder="Full Name"
+                                            required=""/>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +74,6 @@
                             </div>
                         </div>
 
-
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="form-group">
@@ -90,40 +90,10 @@
                             <div class="col-xl-6">
                                 <div class="form-group">
                                     <div class="input-box">
-                                        <input
-                                            type="text"
-                                            name="pickup_address"
-                                            id="pickupAddress"
-                                            placeholder="Pickup Address"
-                                            required="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row ">
-                            <div class="col-xl-6">
-                                <div class="form-group">
-                                    <div class="input-box">
                                         <select name="request_type" id="requestType" required="">
                                             <option value="" disabled selected>Select Request Type</option>
                                             <option value="emergency">Emergency</option>
                                             <option value="non-emergency">Non-Emergency</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-6">
-                                <div class="form-group">
-                                    <div class="input-box">
-                                        <select name="equipment_level" id="equipment_level" class="form-control" required>
-                                            <option value="Basic Life Support (BLS)">Basic Life Support (BLS)</option>
-                                            <option value="Advanced Life Support (ALS)">Advanced Life Support (ALS)</option>
-                                            <option value="Neonatal Ambulance">Neonatal Ambulance</option>
-                                            <option value="Air Ambulance">Air Ambulance</option>
-                                            <option value="Patient Transport">Patient Transport</option>
                                         </select>
                                     </div>
                                 </div>
