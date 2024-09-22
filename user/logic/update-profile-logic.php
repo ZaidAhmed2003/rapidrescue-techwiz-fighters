@@ -2,6 +2,7 @@
 <?php
 require '../config/database.php'; // Database connection
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validate the inputs
     $userId = $_POST['user_id'] ?? null;
@@ -13,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Check if required fields are filled
     if (empty($userId) || empty($firstname) || empty($lastname) || empty($phonenumber) || empty($address)) {
-        $response = array('success' => false, 'message' => 'Error: All fields are required.');
+        $response = ['success' => false, 'message' => 'Error: All fields are required.'];
         echo json_encode($response);
         exit();
     }
@@ -23,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("sssssi", $firstname, $lastname, $phonenumber, $dateOfBirth, $address, $userId);
 
     $response = ($stmt->execute()) ? array('success' => true, 'message' => 'User updated successfully') : ['success' => false, 'message' => "Error: {$stmt->error}"];
-
     echo json_encode($response);
 
     $stmt->close();

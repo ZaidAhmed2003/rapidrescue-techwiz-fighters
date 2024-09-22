@@ -1,5 +1,7 @@
 <?php
+session_start();
 require '../config/database.php'; // Ensure this file correctly sets up the $connection variable
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];

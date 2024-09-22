@@ -18,8 +18,8 @@ if (!$user) {
 <div class="container-fluid p-4">
     <div id="responseMessage">
     </div>
-    <form method="POST" action="" id="adminUpdateprofileForm">
-        <input type="hidden" hidden name="user_id" value="<?= htmlspecialchars($user['userid'] - 1) ?>">
+    <form method="POST" action="" id="userUpdateprofileForm">
+        <input type="hidden" hidden name="user_id" value="<?= htmlspecialchars($user['userid']) -1 ?>">
         <div class="row">
             <div class="col-12 col-md-6 form-outline mb-3">
                 <label class="form-label" for="firstname">First Name</label>

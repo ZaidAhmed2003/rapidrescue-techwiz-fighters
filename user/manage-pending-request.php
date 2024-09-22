@@ -13,9 +13,24 @@ require "includes/sidebar.php";
         <table class="w-100 text-center">
             <?php
             $requestQuery = "
-                    SELECT a.*, d.*
-                    FROM ambulances a 
-                    RIGHT JOIN emergency_requests d ON a.ambulanceid = d.ambulanceid
+                                SELECT 
+       er.requestid,
+     u.firstname,
+      a.vehicle_number,
+    er.request_time,
+    er.status,
+    er.hospital_name,
+    er.pickup_address,
+    er.type
+FROM 
+    emergency_requests er
+JOIN 
+    users u ON er.userid = u.userid
+JOIN 
+    ambulances a ON er.ambulanceid = a.ambulanceid
+       WHERE 
+        er.status = 'pending';
+
                 ";
             $requests = mysqli_query($connection, $requestQuery);
 
@@ -26,14 +41,10 @@ require "includes/sidebar.php";
                         <thead>
                             <tr data-breakpoints="xs" class=" border">
                                 <th class="border">Sno</th>
-                                <th class="border">Type of Ambulance</th>
-                                <th class="border">Ambulance Reg No.</th>
-                                <th class="border">Name of Driver</th>
-                                <th class="border">Phone Number</th>
-                                <th class="border">Phone Number</th>
-                                <th class="border">Phone Number</th>
-                                <th class="border">Phone Number</th>
-
+                                <th class="border">Hospital</th>
+                                <th class="border">Address</th>
+                                <th class="border">Status</th>
+                                <th class="border">Type</th>
                                 <th class="border">Creation Date</th>
                                 <th class="border">Action</th>
                             </tr>
@@ -45,22 +56,15 @@ require "includes/sidebar.php";
                             while ($request = mysqli_fetch_assoc($requests)) : ?>
                                 <tr class=" border">
                                     <td class="border"><?= $serialNo++ ?></td>
-                                    <td class="border"><?= $request['booking_number'] ?>
-                                    </td>
-                                    <td class="border"><?= $request['ambulanceid'] ?></td>
-
                                     <td class="border"><?= $request['hospital_name'] ?></td>
-                                    <td class="border"><?= $request['customer_mobile'] ?></td>
                                     <td class="border"><?= $request['pickup_address'] ?></td>
                                     <td class="border"><?= $request['request_time'] ?></td>
-
                                     <td class="border"><?= $request['type'] ?></td>
                                     <td class="border"><?= $request['status'] ?></td>
-                                    <td class="border">
-                                        <a href="<?= ROOT_URL ?>admin/edit-ambulance.php?id=<?= $request['requestid'] ?>" class="p-1 action-btns">Edit</a>
-                                        <a href="#" class="p-1 action-btns delete-ambulance" data-id="<?= $request['requestid'] ?>">Delete</a>
-                                    </td>
 
+                                    <td class="border">
+                                        <a href="#" class="p-1 action-btns delete-request" data-id="<?= $request['requestid'] ?>">Delete</a>
+                                    </td>
                                 </tr>
                             <?php endwhile ?>
                         </tbody>
@@ -68,7 +72,7 @@ require "includes/sidebar.php";
 
 
                 <?php else : ?>
-                    <div class=" text-center py-5    alert__message error"><?= "No Ambulances Found" ?></div>
+                    <div class=" text-center py-5    alert__message error"><?= "No Request Pending" ?></div>
                 <?php endif ?>
 
     </div>

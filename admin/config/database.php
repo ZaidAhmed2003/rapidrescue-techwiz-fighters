@@ -1,6 +1,11 @@
 <?php
+session_start();
 require "constants.php";
 
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: login.php");
+    exit();
+}
 // connect to database
 $connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
