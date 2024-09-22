@@ -1,5 +1,11 @@
 <?php
+session_start();
 require "../config/database.php";
+
+if ($_SESSION['role'] != 'admin') {
+    header("Location: login.php");
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Get and sanitize input data

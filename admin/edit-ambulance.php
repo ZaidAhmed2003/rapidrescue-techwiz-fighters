@@ -1,11 +1,5 @@
 <?php
-session_start();
 require "includes/header.php";
-
-if ($_SESSION['role'] != 'admin') {
-    header("Location:" . ROOT_URL . "logout.php");
-    exit();
-}
 
 // Fetch user details based on user ID passed in the query string
 $ambulanceId = $_GET['id'];

@@ -1,12 +1,5 @@
 <?php
-session_start();
 require "includes/header.php";
-
-if ($_SESSION['role'] != 'admin') {
-    header("Location:" . ROOT_URL . "logout.php");
-    exit();
-}
-
 require "includes/sidebar.php";
 // Fetch user details based on user ID passed in the query string
 $userId = $_GET['id']; // Make sure to validate this input

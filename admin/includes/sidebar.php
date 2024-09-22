@@ -1,5 +1,5 @@
 <body class="dashboard-body d-flex">
-    <aside class="d-flex flex-column h-100  border-bottom shadow-sm" style="width: 275px;">
+    <aside class="d-flex flex-column h-100  border-bottom shadow-sm" style="width: 285px;">
         <div class="py-2 d-flex justify-content-center bg-white border-bottom shadow-sm">
             <img class="logo-image" src="<?= ROOT_URL ?>assets/images/resources/logo-short.png" alt="Logo">
         </div>
@@ -10,7 +10,7 @@
                 </li>
                 <li class="sidebar-item nav-item has-submenu border-bottom <?= (basename($_SERVER['PHP_SELF']) == 'manage-request.php') ? 'active' : '' ?>">
                     <a class="dropdown-toggle nav-link" href="#" role="button" data-bs-target="#dispatchControl" data-bs-toggle="collapse" aria-expanded="false">
-                        <i class="fa fa-book"></i> Ambulance Requests
+                        <i class="fa fa-book"></i> Emergency Requests
                     </a>
                     <ul class="sidebar-item submenu collapse" id="dispatchControl">
                         <li><a class="nav-link <?= (basename($_SERVER['PHP_SELF']) == 'manage-request.php') ? 'active' : '' ?>" href="<?= ROOT_URL ?>admin/manage-request.php">All Request</a></li>

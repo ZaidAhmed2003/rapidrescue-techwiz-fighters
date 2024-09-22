@@ -1,13 +1,5 @@
 <?php
-session_start();
 require "includes/header.php";
-
-
-if ($_SESSION['role'] != 'admin') {
-    header("Location: login.php");
-    exit();
-}
-
 require "includes/sidebar.php";
 ?>
 
