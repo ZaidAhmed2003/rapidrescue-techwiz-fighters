@@ -7,23 +7,23 @@ require "includes/sidebar.php";
 
 <div class="container-fluid p-4">
     <div class="#responseMessages"></div>
-    <form id="ambulanceForm" method="post" action="<?= ROOT_URL ?>admin/logic/add-ambulance-logic.php">
+    <form id="addambulanceForm" method="post" action="<?= ROOT_URL ?>admin/logic/add-ambulance-logic.php">
         <div class="row">
             <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
                 <label class="form-label" for="vehicle_number">Vehicle Number</label>
-                <input type="text" name="vehicle_number" id="vehicle_number" class="form-control" placeholder="Vehicle Number" required />
+                <input type="text" name="vehicle_number" id="vehicle_number" class="form-control" placeholder="Vehicle Number" />
             </div>
             <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
                 <label class="form-label" for="capacity">Capacity</label>
-                <input type="number" name="capacity" id="capacity" class="form-control" placeholder="Capacity" required />
+                <input type="number" name="capacity" id="capacity" class="form-control" placeholder="Capacity" />
             </div>
             <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
                 <label class="form-label" for="location">Location</label>
-                <input type="text" name="location" id="location" class="form-control" placeholder="Location" required />
+                <input type="text" name="location" id="location" class="form-control" placeholder="Location" />
             </div>
             <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
                 <label class="form-label" for="equipment_level">Equipment Level</label>
-                <select name="equipment_level" id="equipment_level" class="form-control" required>
+                <select name="equipment_level" id="equipment_level" class="form-control">
                     <option value="Basic Life Support (BLS)">Basic Life Support (BLS)</option>
                     <option value="Advanced Life Support (ALS)">Advanced Life Support (ALS)</option>
                     <option value="Neonatal Ambulance">Neonatal Ambulance</option>
@@ -33,7 +33,7 @@ require "includes/sidebar.php";
             </div>
             <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
                 <label class="form-label" for="current_status">Current Status</label>
-                <select name="current_status" id="current_status" class="form-control" required>
+                <select name="current_status" id="current_status" class="form-control">
                     <option value="available">Available</option>
                     <option value="on_call">On Call</option>
                     <option value="dispatched">Dispatched</option>
@@ -42,18 +42,7 @@ require "includes/sidebar.php";
                 </select>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
-            <label class="form-label" for="driver_id">Assign Driver</label>
-            <select name="driver_id" id="driver_id" class="form-control" required>
-                <option value="">Select a driver</option>
-                <?php
-                $drivers = $connection->query("SELECT driverid, firstname, lastname FROM drivers WHERE status = 'On Duty' AND ambulanceid IS NULL");
-                while ($driver = $drivers->fetch_assoc()) {
-                ?>
-                    <option value="<?= $driver['driverid'] ?>" <?= $ambulance['driverid'] == $driver['driverid'] ? 'selected' : '' ?>><?= $driver['firstname'] . " " . $driver['lastname'] ?></option>
-                <?php } ?>
-            </select>
-        </div>
+
         <div class="button-box">
             <input
                 id="form_botcheck"

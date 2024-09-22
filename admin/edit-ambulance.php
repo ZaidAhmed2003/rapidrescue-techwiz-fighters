@@ -20,7 +20,7 @@ require "includes/sidebar.php";
 
 <div class="container-fluid p-4">
     <div id="responseMessage"></div>
-    <form id="editAmbulanceForm" method="post" action="<?= ROOT_URL ?>admin/logic/edit-ambulance-logic.php">
+    <form id="editAmbulanceForm" method="post" action="">
         <input type="hidden" name="id" value="<?= htmlspecialchars($ambulance['ambulanceid']) ?>">
 
         <div class="row">
@@ -55,18 +55,6 @@ require "includes/sidebar.php";
                     <option value="dispatched" <?= $ambulance['current_status'] == 'dispatched' ? 'selected' : '' ?>>Dispatched</option>
                     <option value="maintenance" <?= $ambulance['current_status'] == 'maintenance' ? 'selected' : '' ?>>Maintenance</option>
                     <option value="in_service" <?= $ambulance['current_status'] == 'in_service' ? 'selected' : '' ?>>In Service</option>
-                </select>
-            </div>
-            <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
-                <label class="form-label" for="driver_id">Assign Driver</label>
-                <select name="driver_id" id="driver_id" class="form-control" required>
-                    <option value="">Select a driver</option>
-                    <?php
-                    $drivers = $connection->query("SELECT driverid, firstname, lastname FROM drivers WHERE status = 'On Duty' AND ambulanceid IS NULL");
-                    while ($driver = $drivers->fetch_assoc()) {
-                    ?>
-                        <option value="<?= $driver['driverid'] ?>" <?= $ambulance['driverid'] == $driver['driverid'] ? 'selected' : '' ?>><?= $driver['firstname'] . " " . $driver['lastname'] ?></option>
-                    <?php } ?>
                 </select>
             </div>
         </div>

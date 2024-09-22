@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Fetch user from the database
     $query = $connection->prepare("SELECT * FROM users WHERE email = ?");
     if (!$query) {
-        echo 'Query preparation failed: ' . $connection->error;
+        echo "Query preparation failed: {$connection->error}";
         exit();
     }
 

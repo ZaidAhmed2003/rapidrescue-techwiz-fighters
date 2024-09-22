@@ -40,7 +40,7 @@
     <main class="flex-grow w-100">
         <div class="d-flex justify-content-between align-items-center shadow-sm py-2 px-3">
             <h3>
-                Welcome to Admin Dashboard
+                Welcome to User Dashboard
             </h3>
             <div class="main-menu style1 navbar-expand-md navbar-light">
                 <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent" bis_skin_checked="1">

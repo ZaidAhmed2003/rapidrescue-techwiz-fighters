@@ -2,8 +2,9 @@
 session_start();
 require "config/database.php";
 // check if the user is an admin
-if ($_SESSION['role'] !== 'admin') {
-    header('Location: ../login.php');
+if ($_SESSION['role'] !== 'user') {
+    header('Location:' . ROOT_URL . ' ../login.php');
+
     exit();
 }
 ?>

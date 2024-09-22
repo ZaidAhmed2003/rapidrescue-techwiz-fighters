@@ -136,7 +136,7 @@ require "includes/sidebar.php";
                     <div class="row align-items-center mb-2 d-flex">
                         <div class="col-6">
                             <h2 class="d-flex align-items-center mb-0">
-                                <?php $requeststQuery = mysqli_query($connection, "Select * from  emergency_request");
+                                <?php $requeststQuery = mysqli_query($connection, "Select * from  emergency_requests");
                                 $requestsCount = mysqli_num_rows($requeststQuery);
                                 echo $requestsCount;
                                 ?>

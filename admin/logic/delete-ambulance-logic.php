@@ -4,29 +4,43 @@ require '../config/database.php'; // Database connection
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id'])) {
     $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
 
-    // Prepare a statement with a parameterized query
-    $stmt = $connection->prepare("DELETE FROM ambulances WHERE ambulanceid = ?");
+    // Prepare a statement to fetch the user
+    $stmt = $connection->prepare("SELECT vehicle_number FROM ambulances WHERE ambulanceid = ?");
     $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    // Execute the prepared statement
-    if ($stmt->execute()) {
-        echo json_encode([
-            'status' => 'success',
-            'message' => "Ambulance deleted successfully."
-        ]);
+    if ($result && $result->num_rows > 0) {
+        $ambulance = $result->fetch_assoc();
+
+        // Prepare a statement to delete the user
+        $stmt = $connection->prepare("DELETE FROM ambulances WHERE ambulanceid = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            echo json_encode([
+                'status' => 'success',
+                'message' => "Ambulance '{$ambulance['vehicle_number']}' deleted successfully."
+            ]);
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'message' => "Couldn't delete '{$ambulance['vehicle_number']}.'"
+            ]);
+        }
     } else {
         echo json_encode([
             'status' => 'error',
-            'message' => "Couldn't delete ambulance."
+            'message' => "Ambulance not found."
         ]);
     }
-
-    // Close the prepared statement and database connection
-    $stmt->close();
-    $connection->close();
 } else {
     echo json_encode([
         'status' => 'error',
         'message' => "Invalid request."
     ]);
 }
+
+// Close database connection
+$connection->close();

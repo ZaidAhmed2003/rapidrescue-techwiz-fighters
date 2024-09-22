@@ -739,7 +739,7 @@ jQuery(window).on("load", function () {
     isotopeBlock();
   })(jQuery);
 });
-
+ 
 // Handle Login Form
 if ($("#loginForm").length) {
   $("#loginForm").on("submit", function (e) {
@@ -754,9 +754,9 @@ if ($("#loginForm").length) {
         if (response == "admin") {
           window.location.href = ROOT_URL + "admin/index.php"; // Redirect to admin dashboard
         } else if (response == "user") {
-          window.location.href = ROOT_URL + "client/User/index.php"; // Redirect to user dashboard
+          window.location.href = ROOT_URL + "user/index.php"; // Redirect to user dashboard
         } else if (response == "driver") {
-          window.location.href = ROOT_URL + "client/driver.php"; // Redirect to driver dashboard
+          window.location.href = ROOT_URL + "driver/index.php"; // Redirect to driver dashboard
         } else {
           alert("login failed!"); // Display error message
         }
@@ -934,74 +934,158 @@ if ($("#editUserForm").length) {
   });
 }
 
-// Handle Delete Ambulance
-if ($(".delete-ambulance").length) {
-  $(".delete-ambulance").on("click", function (e) {
-    e.preventDefault(); // Prevent the default anchor behavior
-    const id = $(this).data("id");
-
-    if (confirm("Are you sure you want to delete this ambulance?")) {
-      $.ajax({
-        url: ROOT_URL + "admin/logic/delete-ambulance-logic.php", // Update with your script path
-        type: "POST",
-        data: { id: id },
-        dataType: "json",
-        success: function (response) {
-          if (response.status === "success") {
-            alert(response.message);
-            // Optionally, refresh the page or remove the ambulance from the UI
-            location.reload(); // or you can remove the deleted item from the DOM
-          } else {
-            alert(response.message);
-          }
-        },
-        error: function () {
-          alert("An error occurred while deleting the ambulance.");
-        },
-      });
-    }
-  });
-}
-
 // Handle ADD Ambulance
-if ($(".delete-ambulance").length) {
-  $("#ambulanceForm").on("submit", function (e) {
-    e.preventDefault(); // Prevent default form submission
+if ($("#addambulanceForm").length) {
+  $("#addambulanceForm").on("submit", function (e) {
+    e.preventDefault(); // Prevent the form from submitting the default way
+    $("#responseMessage").html(
+      '<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>'
+    );
     $.ajax({
+      url: ROOT_URL + "admin/logic/add-ambulance-logic.php", // URL of the PHP processing script
       type: "POST",
-      url: ROOT_URL + "admin/logic/add-ambulance-logic.php", // Create this file for processing
-      data: $(this).serialize(),
+      data: $(this).serialize(), // Serialize the form data
+      dataType: "json", // Expect a JSON response
       success: function (response) {
-        $("#responseMessage").html(response); // Display response
-        $("#ambulanceForm")[0].reset(); // Reset form
+        if (response.error) {
+          $("#responseMessage").html(
+            `<div class="alert alert-danger">${response.message}</div>`
+          );
+          setTimeout(function () {
+            $("#responseMessage").html(""); // Clear the error message after 3 seconds
+          }, 3000);
+        } else {
+          $("#responseMessage").html(
+            `<div class="alert alert-success">${response.message}</div>`
+          );
+          setTimeout(() => {
+            window.location.href = ROOT_URL + "admin/manage-ambulance.php";
+          }, 1000);
+        }
       },
-      error: function () {
+      error: function (xhr, status, error) {
+        // Handle error response
         $("#responseMessage").html(
-          '<div class="alert alert-danger">There was an error processing your request.</div>'
+          '<div class="alert alert-danger">Error: ' + error + "</div>"
         );
       },
     });
   });
 }
 
-// Handle ADD Ambulance
-if ($("#ambulance-request-form").length) {
-  $("#ambulance-request-form").on("submit", function (e) {
-    e.preventDefault(); // Prevent default form submission
+// Handle Update Ambulance
+if ($("#editAmbulanceForm").length) {
+  $("#editAmbulanceForm").on("submit", function (e) {
+    e.preventDefault(); // Prevent the form from submitting the default way
+    $("#responseMessage").html(
+      '<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>'
+    );
     $.ajax({
+      url: ROOT_URL + "admin/logic/edit-ambulance-logic.php", // URL of the PHP processing script
       type: "POST",
-      url: ROOT_URL + "logic/request-ambulance-logic.php", // Create this file for processing
-      data: $(this).serialize(),
+      data: $(this).serialize(), // Serialize the form data
+      dataType: "json", // Expect a JSON response
       success: function (response) {
-        alert(response);
-        $("#responseMessage").html(
-          '<div class="alert alert-success">${response}</div>'
-        ); // Display response
-        $("#ambulance-request-form")[0].reset(); // Reset form
+        if (response.error) {
+          $("#responseMessage").html(
+            `<div class="alert alert-danger">${response.message}</div>`
+          );
+          setTimeout(function () {
+            $("#responseMessage").html(""); // Clear the error message after 3 seconds
+          }, 3000);
+        } else {
+          $("#responseMessage").html(
+            `<div class="alert alert-success">${response.message}</div>`
+          );
+          setTimeout(() => {
+            window.location.href = ROOT_URL + "admin/manage-ambulance.php";
+          }, 1000);
+        }
       },
-      error: function () {
+      error: function (xhr, status, error) {
+        // Handle error response
         $("#responseMessage").html(
-          '<div class="alert alert-danger">There was an error processing your request.</div>'
+          '<div class="alert alert-danger">Error: ' +
+            status +
+            xhr +
+            error +
+            "</div>"
+        );
+      },
+    });
+  });
+}
+
+// Handle Delete User
+if ($(".delete-ambulance").length) {
+  $(".delete-ambulance").on("click", function (e) {
+    e.preventDefault(); // Prevent the default anchor behavior
+    const id = $(this).data("id");
+    if (confirm("Are you sure you want to delete this Ambulance?")) {
+      $.ajax({
+        url: ROOT_URL + "admin/logic/delete-ambulance-logic.php", // Update with your script path
+        type: "POST",
+        data: { id: id },
+        dataType: "json",
+        success: function (response) {
+          if (response.error) {
+            $("#responseMessage").html(
+              `<div class="alert alert-danger">${response.message}</div>`
+            );
+            setTimeout(function () {
+              $("#responseMessage").html(""); // Clear the error message after 3 seconds
+            }, 3000);
+          } else {
+            $("#responseMessage").html(
+              `<div class="alert alert-success">${response.message}</div>`
+            );
+            location.reload();
+          }
+        },
+        error: function (xhr, status, error) {
+          $("#responseMessage").html(
+            '<div class="alert alert-danger">Error: ' + error + "</div>"
+          );
+        },
+      });
+    }
+  });
+}
+
+// Handle Update Profile
+if ($("#updateprofileForm").length) {
+  $("#updateprofileForm").on("submit", function (e) {
+    e.preventDefault(); // Prevent the form from submitting the default way
+    $("#responseMessage").html(
+      '<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>'
+    );
+    $.ajax({
+      url: ROOT_URL + "admin/logic/update-profile-logic.php", // URL of the PHP processing script
+      type: "POST",
+      data: $(this).serialize(), // Serialize the form data
+      dataType: "json", // Expect a JSON response
+      success: function (response) {
+        if (response.error) {
+          $("#responseMessage").html(
+            `<div class="alert alert-danger">${response.message}</div>`
+          );
+          setTimeout(function () {
+            $("#responseMessage").html(""); // Clear the error message after 3 seconds
+          }, 2000);
+        } else {
+          $("#responseMessage").html(
+            `<div class="alert alert-success">${response.message}</div>`
+          );
+        }
+      },
+      error: function (xhr, status, error) {
+        // Handle error response
+        $("#responseMessage").html(
+          '<div class="alert alert-danger">Error: ' +
+            status +
+            xhr +
+            error +
+            "</div>"
         );
       },
     });

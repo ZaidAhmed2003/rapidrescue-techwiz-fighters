@@ -27,7 +27,6 @@
 
 <!-- thm custom script -->
 <script src="assets/js/custom.js"></script>
-<script src="assets/js/ajax-requests.js"></script>
 </body>
 
 </html>

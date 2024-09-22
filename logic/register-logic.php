@@ -9,7 +9,7 @@
         $phonenumber = filter_var(trim($_POST['phonenumber']), FILTER_SANITIZE_NUMBER_INT);
         $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
         $role = $_POST['role'] ?? 'user';  // Default role to 'user' if not provided
-        $date_of_birth = !empty($_POST['dateofbirth']) ? filter_var(trim($_POST['dob']), FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null; // Optional
+        $date_of_birth = !empty($_POST['dateofbirth']) ? filter_var(trim($_POST['dateofbirth']), FILTER_SANITIZE_FULL_SPECIAL_CHARS) : null; // Optional
         $address = filter_var(trim($_POST['address']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         // Basic Validation

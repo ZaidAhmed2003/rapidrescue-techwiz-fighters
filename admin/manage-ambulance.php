@@ -6,6 +6,7 @@ require "includes/sidebar.php";
 
 
 <div class="container-fluid px-5 py-4">
+    <div id="responseMessage"></div>
     <div class="panel d-flex align-items-center justify-content-center">
         <div class="panel-heading border w-100 text-center py-2">
             Manage Ambulances
