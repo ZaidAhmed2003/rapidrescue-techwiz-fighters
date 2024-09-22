@@ -28,8 +28,8 @@ $userId = $_SESSION['userid']
                     placeholder="phone number" />
             </div>
             <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
-                <label class="form-label" for="type">Emergency Type</label>
-                <select name="type" id="type" class="form-control">
+                <label class="form-label" for="typetypeemr">Emergency Type</label>
+                <select name="typeemr" id="typeemr" class="form-control">
                     <option value="emergency">Emergency</option>
                     <option value="non-emergency">Non Emergency</option>
                 </select>

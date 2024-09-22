@@ -1193,7 +1193,11 @@ if ($("#add-emergency-request-form").length) {
       error: function (xhr, status, error) {
         // Handle error response
         $("#responseMessage").html(
-          '<div class="alert alert-danger">Error: ' + error + "</div>"
+          '<div class="alert alert-danger">Error: ' +
+            status +
+            xhr +
+            error +
+            "</div>"
         );
       },
     });

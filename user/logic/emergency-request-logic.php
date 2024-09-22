@@ -28,7 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $hospital = $_POST['hospital'];
     $address = $_POST['address'];
     $phonenumber = $_POST['phonenumber'];
-    $type = $_POST['type'] ?? 'non-emergency';
+    $type = filter_var($_POST['typeemr'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
 
     $errors = [];
 
