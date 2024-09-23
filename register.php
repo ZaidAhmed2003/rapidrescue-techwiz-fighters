@@ -21,26 +21,26 @@ require "includes/header.php";
                         <div class="col-12 col-md-6 form-outline mb-3">
                             <label class="form-label" for="firstname">First Name</label>
                             <input type="text" name="firstname" id="firstname" class="form-control"
-                                placeholder="first name" required />
+                                placeholder="first name" />
                         </div>
                         <div class="col-12 col-md-6 form-outline mb-3">
                             <label class="form-label" for="lastname">Last Name</label>
                             <input type="text" name="lastname" id="lastname" class="form-control"
-                                placeholder="last name" required />
+                                placeholder="last name" />
                         </div>
                         <div class="col-12 col-md-6 form-outline mb-3">
                             <label class="form-label" for="email">Email</label>
                             <input type="email" name="email" id="email" class="form-control"
-                                placeholder="email address" required />
+                                placeholder="email address" />
                         </div>
                         <div class="col-12 col-md-6 form-outline mb-3">
                             <label class="form-label" for="phonenumber">Phone Number</label>
                             <input type="text" name="phonenumber" id="phonenumber" class="form-control"
-                                placeholder="phone number" required />
+                                placeholder="phone number" />
                         </div>
                         <div class="col-12 col-md-6 form-outline mb-4">
                             <label class="form-label" for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control" placeholder="enter your password" required />
+                            <input type="password" name="password" id="password" class="form-control" placeholder="enter your password" />
                         </div>
                         <div class="col-12 col-md-6 form-outline mb-3">
                             <label class="form-label" for="dateofbirth">Date of Birth</label>

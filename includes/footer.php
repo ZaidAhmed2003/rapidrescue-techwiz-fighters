@@ -80,8 +80,7 @@
                                     <li><a href="#services">Our Services</a></li>
                                     <li><a href="#requestAmbulanceForm">Contact</a></li>
                                     <li><a href="<?= ROOT_URL ?>login.php?role=admin">Admin</a></li>
-                                    <li><a href="<?= ROOT_URL ?>login.php?role=user">User</a></li>
-                                    <li><a href="<?= ROOT_URL ?>login.php?role=driver">Driver</a></li>
+                                    <li><a href="<?= ROOT_URL ?>login.php?role=driver">Driver/EMT</a></li>
                                 </ul>
                             </div>
                         </div>

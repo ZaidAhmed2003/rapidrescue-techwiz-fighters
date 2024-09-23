@@ -4,7 +4,7 @@ require "../config/database.php";
 
 // Check user role
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-    header("Location: login.php");
+    header("Location:" . ROOT_URL . "login.php");
     exit();
 }
 
@@ -64,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $connection->close();
 
     // Send JSON response
-    header('Content-Type: application/json');
     echo json_encode($response);
     exit();
 }

@@ -785,11 +785,11 @@ if ($("#registerForm").length) {
       url: ROOT_URL + "logic/register-logic.php",
       data: formData,
       success: function (response) {
-        if (response.trim() === "success") {
-          // Redirect to login page on success
-          window.location.href = "login.php?role=user"; // Change to your login page URL
+        if (response.success) {
+          alert(response.message);
+          window.location.href = ROOT_URL + "login.php?role=user"; // Change to your login page URL
         } else {
-          alert(response); // Show the error message
+          alert(response.message);
         }
       },
       error: function (xhr, status, error) {

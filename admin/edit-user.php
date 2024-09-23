@@ -2,9 +2,12 @@
 require "includes/header.php";
 require "includes/sidebar.php";
 // Fetch user details based on user ID passed in the query string
-$userId = $_GET['id']; // Make sure to validate this input
+$userId = $_GET['id'];
 $query = "SELECT * FROM users WHERE userid='$userId'";
-$result = $connection->query($query);
+$stmt = $connection->prepare("SELECT * FROM users WHERE userid = ?");
+$stmt->bind_param("i", $userId); // assuming userId is an integer
+$stmt->execute();
+$result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if (!$user) {
@@ -51,7 +54,7 @@ if (!$user) {
                     <option value="user" <?= $user['role'] == 'user' ? 'selected' : '' ?>>User</option>
                     <option value="admin" <?= $user['role'] == 'admin' ? 'selected' : '' ?>>Admin</option>
                     <option value="driver" <?= $user['role'] == 'driver' ? 'selected' : '' ?>>Driver</option>
-                    <!-- Add other roles as needed -->
+
                 </select>
             </div>
         </div>

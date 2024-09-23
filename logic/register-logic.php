@@ -55,7 +55,7 @@
         $result = $query->get_result();
 
         if ($result->num_rows > 0) {
-            echo "Email is already registered.";
+            echo json_encode(["status" => "false", "message" => "Email is already registered."]);
             exit();
         }
 
@@ -72,9 +72,9 @@
 
         // Execute the query and check for success
         if ($stmt->execute()) {
-            echo "Registration successful!";
+            echo json_encode(["status" => "true", "message" => "Registration successful!"]);
         } else {
-            echo "Registration failed. Please try again.";
+            echo json_encode(["status" => "false", "message" => "Registration failed. Please try again."]);
         }
 
         // Close the statement and connection
