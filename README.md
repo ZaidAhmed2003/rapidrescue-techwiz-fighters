@@ -2,4 +2,8 @@
 
 ## Contributers
 
--- github.com/zaidahmed2345
+ [Zaid Ahmed](github.com/zaidahmed2345)
+
+ [Umer Hafeez](github.com/Umerhafeez05)
+
+ [Huzaifa](github.com/Huzaifa-001)
