@@ -24,7 +24,7 @@ require "includes/sidebar.php";
                             </h2>
                         </div>
                         <div class="col-6 text-right">
-                            <a href="<?= ROOT_URL ?>manage-ambulance.php">View Details</a>
+                            <a href="<?= ROOT_URL ?>user/manage-all-request.php">View Details</a>
                         </div>
                     </div>
 

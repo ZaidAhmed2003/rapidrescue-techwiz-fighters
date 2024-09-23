@@ -21,7 +21,7 @@ require "includes/sidebar.php";
 <div class="container-fluid p-4">
     <div id="responseMessage"></div>
     <form id="editAmbulanceForm" method="post" action="">
-        <input type="hidden" name="id" value="<?= htmlspecialchars($ambulance['ambulanceid']) ?>">
+        <input type="hidden" name="id" value="<?= htmlspecialchars($ambulance['ambulanceid']) ?>" />
 
         <div class="row">
             <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">

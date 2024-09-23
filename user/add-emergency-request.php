@@ -11,7 +11,7 @@ $userId = $_SESSION['userid']
     </div>
     <form id="add-emergency-request-form" action="" method="post">
         <div class="row">
-            <input type="text" hidden name="userid" value="<?= htmlspecialchars($userId) ?>">
+            <input type="text" hidden name="userid" value="<?= htmlspecialchars($userId) ?>" />
             <div class="col-12 col-md-6 form-outline mb-3">
                 <label class="form-label" for="hospital">Hospital Name</label>
                 <input type="text" name="hospital" id="firstname" class="form-control"

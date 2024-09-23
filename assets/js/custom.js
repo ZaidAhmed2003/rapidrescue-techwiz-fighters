@@ -906,6 +906,10 @@ if ($("#editUserForm").length) {
     $("#responseMessage").html(
       '<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>'
     );
+
+    // Show loading spinner or disable the button during the request
+    $("button[type=submit]").prop("disabled", true).text("Updating...");
+
     $.ajax({
       url: ROOT_URL + "admin/logic/edit-user-logic.php", // URL of the PHP processing script
       type: "POST",
@@ -926,10 +930,15 @@ if ($("#editUserForm").length) {
         }
       },
       error: function (xhr, status, error) {
-        // Handle error response
+        // Display detailed error information
+        let errorMsg = xhr.responseJSON?.message || "An error occurred.";
         $("#responseMessage").html(
-          '<div class="alert alert-danger">Error: ' + error + "</div>"
+          `<div class="alert alert-danger">Error: ${errorMsg} (${xhr.status})</div>`
         );
+      },
+      complete: function () {
+        // Enable the button again after request is complete
+        $("button[type=submit]").prop("disabled", false).text("Update User");
       },
     });
   });
@@ -1162,6 +1171,49 @@ if ($(".delete-request").length) {
 }
 
 // Handle ADD Ambulance
+if ($("#add-emergency-request-form").length) {
+  $("#add-emergency-request-form").on("submit", function (e) {
+    e.preventDefault(); // Prevent the form from submitting the default way
+    $("#responseMessage").html(
+      '<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>'
+    );
+    $.ajax({
+      url: ROOT_URL + "user/logic/emergency-request-logic.php", // URL of the PHP processing script
+      type: "POST",
+      data: $(this).serialize(), // Serialize the form data
+      dataType: "json", // Expect a JSON response
+      success: function (response) {
+        if (response.error) {
+          $("#responseMessage").html(
+            `<div class="alert alert-danger">${response.message}</div>`
+          );
+          setTimeout(function () {
+            $("#responseMessage").html(""); // Clear the error message after 3 seconds
+          }, 3000);
+        } else {
+          $("#responseMessage").html(
+            `<div class="alert alert-success">${response.message}</div>`
+          );
+          setTimeout(() => {
+            window.location.href = ROOT_URL + "user/manage-all-request.php";
+          }, 1000);
+        }
+      },
+      error: function (xhr, status, error) {
+        // Handle error response
+        $("#responseMessage").html(
+          '<div class="alert alert-danger">Error: ' +
+            status +
+            xhr +
+            error +
+            "</div>"
+        );
+      },
+    });
+  });
+}
+
+// Handle ADD Emergency Requests from User
 if ($("#add-emergency-request-form").length) {
   $("#add-emergency-request-form").on("submit", function (e) {
     e.preventDefault(); // Prevent the form from submitting the default way

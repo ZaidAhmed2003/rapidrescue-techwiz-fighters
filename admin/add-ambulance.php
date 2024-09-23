@@ -6,7 +6,7 @@ require "includes/sidebar.php";
 
 
 <div class="container-fluid p-4">
-    <div class="#responseMessages"></div>
+    <div id="responseMessage"></div>
     <form id="addambulanceForm" method="post" action="<?= ROOT_URL ?>admin/logic/add-ambulance-logic.php">
         <div class="row">
             <div class="col-12 col-md-6 col-xl-4 form-outline mb-3">
@@ -59,7 +59,7 @@ require "includes/sidebar.php";
         </div>
 
     </form>
-    <div id="responseMessage" class="mt-3"></div>
+
 </div>
 </main>
 

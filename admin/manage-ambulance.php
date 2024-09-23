@@ -31,9 +31,9 @@ require "includes/sidebar.php";
                                 <th class="border">Sno</th>
                                 <th class="border">Type of Ambulance</th>
                                 <th class="border">Ambulance Reg No.</th>
-                                <th class="border">Name of Driver</th>
-                                <th class="border">Phone Number</th>
-
+                                <th class="border">Driver Assigned</th>
+                                <th class="border">Capacity</th>
+                                <th class="border">Location</th>
                                 <th class="border">Creation Date</th>
                                 <th class="border">Action</th>
                             </tr>
@@ -51,8 +51,8 @@ require "includes/sidebar.php";
                                     <td class="border"> <?= $ambulance['firstname'] && $ambulance['lastname']
                                                             ? $ambulance['firstname'] . " " . $ambulance['lastname']
                                                             : 'Not Assigned' ?></td>
-                                    <td class="border"><?= $ambulance['phonenumber'] ?></td>
-
+                                    <td class="border"><?= $ambulance['capacity'] ?></td>
+                                    <td class="border"><?= $ambulance['location'] ?></td>
                                     <td class="border"><?= $ambulance['created_at'] ?></td>
                                     <td class="border">
                                         <a href="<?= ROOT_URL ?>admin/edit-ambulance.php?id=<?= $ambulance['ambulanceid'] ?>" class="p-1 action-btns">Edit</a>
@@ -66,7 +66,7 @@ require "includes/sidebar.php";
 
 
                 <?php else : ?>
-                    <div class=" text-center py-5    alert__message error"><?= "No Ambulances Found" ?></div>
+                    <div class=" text-center py-5 alert__message error"><?= "No Ambulances Found" ?></div>
                 <?php endif ?>
 
     </div>

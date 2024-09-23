@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors[] = 'Phone Number is required.';
     }
     if (empty($type)) {
-        $errors[] = 'Plz Select Emeergency Type.';
+        $errors[] = 'Please Select Emergency Type.';
     }
 
     // If there are validation errors, return JSON response
@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Execute the prepared statement
         if ($stmt->execute()) {
-            echo json_encode(['error' => false, 'message' => 'Emergency Request has ben sent']);
+            echo json_encode(['error' => false, 'message' => 'Emergency Request has been sent']);
         } else {
             // SQL Error
             echo json_encode(['error' => true, 'message' => "Failed to add request. SQL Error: {$stmt->error}"]);
@@ -80,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo json_encode(['error' => true, 'message' => "Failed to prepare SQL statement: {$connection->error}"]);
     }
 
-    // Close the query and database connection
-    $query->close();
+    // Close the database connection
     $connection->close();
 }

@@ -36,10 +36,10 @@
                 Welcome to User Dashboard
             </h3>
             <div class="d-flex align-items-center">
-                <div class="nav-link">
+                <div class="nav  nav-link">
                     <ul>
                         <li>
-                            <a href="<?= ROOT_URL ?>user/emergency-request.php?id=<?= $_SESSION['userid'] ?>">
+                            <a href="<?= ROOT_URL ?>user/add-emergency-request.php?id=<?= $_SESSION['userid'] ?>">
                                 Request an Ambulance
                             </a>
                         </li>
