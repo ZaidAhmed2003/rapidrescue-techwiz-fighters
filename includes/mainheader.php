@@ -77,7 +77,7 @@
                   <li><a href="#about">About Us</a></li>
                   <li><a href="#services">Services</a></li>
                   <li><a href="#blog">Blog</a></li>
-                  <li><a href="<?= ROOT_URL ?>login.php?role=admin">Admin</a></li>
+                  <li><a href="<?= ROOT_URL ?>login.php?role=admin">Login</a></li>
                   <li><a href="#requestAmbulanceForm">Requset An Ambulance</a></li>
                   <!-- <li class="dropdown">
                     <a href="#">Login</a>

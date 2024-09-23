@@ -13,7 +13,7 @@ CREATE TABLE users (
     address VARCHAR(255),
     role ENUM('user', 'admin', 'driver') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    profile_picture VARCHAR(255) NULL  // added column for profile picture
+    profile_picture VARCHAR(255) NULL  
 );
 
 CREATE TABLE ambulances (
@@ -24,7 +24,7 @@ CREATE TABLE ambulances (
     location VARCHAR(255) NOT NULL,
     current_status ENUM('available', 'dispatched', 'on_call', 'maintenance', 'in_service') DEFAULT 'available',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    gps_coordinates VARCHAR(50) NULL  // added column for GPS coordinates
+    gps_coordinates VARCHAR(50) NULL  
 );
 
 CREATE TABLE emergency_requests (
@@ -37,7 +37,7 @@ CREATE TABLE emergency_requests (
     pickup_address VARCHAR(255),
     customer_mobile VARCHAR(15),
     type ENUM('emergency', 'non-emergency'),
-    gps_coordinates VARCHAR(50) NULL,  // added column for GPS coordinates
+    gps_coordinates VARCHAR(50) NULL, 
     FOREIGN KEY (userid) REFERENCES users(userid),
     FOREIGN KEY (ambulanceid) REFERENCES ambulances(ambulanceid)
 );
@@ -62,7 +62,7 @@ CREATE TABLE drivers (
     experience_years INT DEFAULT 0,
     status ENUM('On Duty', 'Off Duty') DEFAULT 'On Duty',
     ambulanceid INT,
-    gps_coordinates VARCHAR(50) NULL,  // added column for GPS coordinates
+    gps_coordinates VARCHAR(50) NULL,  
     FOREIGN KEY (ambulanceid) REFERENCES ambulances(ambulanceid) ON DELETE SET NULL
 );
 
